@@ -1,0 +1,189 @@
+<!doctype html>
+<!-- Automatisch erzeugt von build.mjs – bitte dort ändern, nicht hier. -->
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Nunito"; src: url("assets/fonts/nunito-latin-wght-normal.woff2") format("woff2"); font-weight: 200 1000; }
+      :root { --paper: #fff6e0; --ink: #3a2412; --accent: #c2541b; --green: #2f6b4f; --line: #e3cf9f; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Nunito", sans-serif; color: var(--ink); background: radial-gradient(circle at 20% 0%, #fffaf0 0, transparent 50%), radial-gradient(circle at 100% 100%, #f6e7c3 0, transparent 55%), var(--paper); }
+      .head { position: absolute; left: 0; right: 0; top: 44px; text-align: center; font-family: "Fraunces", serif; font-weight: 800; font-size: 84px; letter-spacing: -0.01em; }
+      .owl { position: absolute; left: 50px; bottom: 44px; width: 210px; height: 210px; border-radius: 50%; overflow: hidden; border: 6px solid #fffdf6; box-shadow: 0 0 0 3px var(--line), 0 10px 0 rgba(58, 36, 18, 0.12); z-index: 5; }
+      .owl img { width: 100%; height: 100%; object-fit: cover; }
+      .cell { position: absolute; width: 84px; height: 92px; display: grid; place-items: center; font-family: "Nunito", sans-serif; font-weight: 900; font-size: 84px; line-height: 1; font-variant-numeric: tabular-nums; }
+      .quot { color: var(--green); }
+      .comma { width: 40px; color: var(--accent); }
+      .minus { color: var(--ink); opacity: 0.8; }
+      .rest { color: var(--accent); }
+      .drop { color: var(--accent); }
+      .rule { position: absolute; height: 7px; border-radius: 4px; background: var(--ink); transform-origin: left center; }
+      .step { position: absolute; width: 500px; height: 108px; display: flex; align-items: center; gap: 22px; padding: 0 28px; border-radius: 26px; background: #fffdf6; border: 4px solid var(--line); box-shadow: 0 8px 0 rgba(58, 36, 18, 0.12); font-size: 44px; font-weight: 900; white-space: nowrap; }
+      .step em { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; font-family: "Fraunces", serif; font-style: normal; font-size: 40px; }
+      .cap { position: absolute; z-index: 40; left: 300px; right: 80px; bottom: 54px; display: flex; justify-content: center; }
+      .cap span { display: block; background: var(--ink); color: var(--paper); font-family: "Fraunces", serif; font-weight: 600; font-size: 46px; line-height: 1.28; text-align: center; padding: 22px 46px; border-radius: 28px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="56.13" data-width="1920" data-height="1080">
+      <audio id="a1" src="assets/d1.mp3" data-start="0.8" data-duration="5.8" data-track-index="5" data-volume="1"></audio>
+      <div id="cap0" class="clip cap" data-start="0.8" data-duration="2.5" data-track-index="3"><span>Schriftlich dividieren – so geht’s.</span></div>
+      <div id="cap1" class="clip cap" data-start="3.3" data-duration="3.7" data-track-index="3"><span>Wir rechnen: dreizehn geteilt durch vier.</span></div>
+      <audio id="a2" src="assets/d2.mp3" data-start="7.2" data-duration="9.8" data-track-index="5" data-volume="1"></audio>
+      <div id="cap2" class="clip cap" data-start="7.2" data-duration="3.65" data-track-index="3"><span>Wie oft passt die Vier in die Dreizehn? Dreimal.</span></div>
+      <div id="cap3" class="clip cap" data-start="10.85" data-duration="2.15" data-track-index="3"><span>Drei mal vier ist zwölf.</span></div>
+      <div id="cap4" class="clip cap" data-start="13" data-duration="4.4" data-track-index="3"><span>Dreizehn minus zwölf: Es bleibt der Rest eins.</span></div>
+      <audio id="a3" src="assets/d3.mp3" data-start="17.6" data-duration="8.99" data-track-index="5" data-volume="1"></audio>
+      <div id="cap5" class="clip cap" data-start="17.6" data-duration="2.2" data-track-index="3"><span>Jetzt sind keine Ziffern mehr da.</span></div>
+      <div id="cap6" class="clip cap" data-start="19.8" data-duration="4.6" data-track-index="3"><span>Deshalb setzen wir im Ergebnis ein Komma und holen eine Null herunter.</span></div>
+      <div id="cap7" class="clip cap" data-start="24.4" data-duration="2.59" data-track-index="3"><span>Aus der Eins wird eine Zehn.</span></div>
+      <audio id="a4" src="assets/d4.mp3" data-start="27.19" data-duration="6.77" data-track-index="5" data-volume="1"></audio>
+      <div id="cap8" class="clip cap" data-start="27.19" data-duration="2.6" data-track-index="3"><span>Die Vier passt zweimal in die Zehn.</span></div>
+      <div id="cap9" class="clip cap" data-start="29.79" data-duration="2.2" data-track-index="3"><span>Zwei mal vier ist acht.</span></div>
+      <div id="cap10" class="clip cap" data-start="31.99" data-duration="2.37" data-track-index="3"><span>Es bleibt der Rest zwei.</span></div>
+      <audio id="a5" src="assets/d5.mp3" data-start="34.56" data-duration="8.12" data-track-index="5" data-volume="1"></audio>
+      <div id="cap11" class="clip cap" data-start="34.56" data-duration="2.25" data-track-index="3"><span>Wieder holen wir eine Null herunter.</span></div>
+      <div id="cap12" class="clip cap" data-start="36.81" data-duration="3" data-track-index="3"><span>Die Vier passt fünfmal in die Zwanzig.</span></div>
+      <div id="cap13" class="clip cap" data-start="39.81" data-duration="3.27" data-track-index="3"><span>Der Rest ist null – wir sind fertig.</span></div>
+      <audio id="a6" src="assets/d6.mp3" data-start="43.28" data-duration="9.25" data-track-index="5" data-volume="1"></audio>
+      <div id="cap14" class="clip cap" data-start="43.28" data-duration="3.65" data-track-index="3"><span>Dreizehn geteilt durch vier ist drei Komma zwei fünf.</span></div>
+      <div id="cap15" class="clip cap" data-start="46.93" data-duration="6" data-track-index="3"><span>Merke dir: Teilen, malnehmen, abziehen, herunterholen.</span></div>
+      <div id="head" class="clip head" style="" data-start="0" data-duration="56.13" data-track-index="1">Schriftlich dividieren</div>
+      <div id="owl" class="clip owl" style="" data-start="0" data-duration="56.13" data-track-index="1"><img src="assets/eule.jpg" alt="" /></div>
+      <div id="z0" class="clip cell " style="left:420px;top:185px" data-start="3.8" data-duration="52.33" data-track-index="1">1</div>
+      <div id="z1" class="clip cell " style="left:504px;top:185px" data-start="3.92" data-duration="52.21" data-track-index="1">3</div>
+      <div id="z2" class="clip cell " style="left:588px;top:185px" data-start="4.04" data-duration="52.09" data-track-index="1">:</div>
+      <div id="z3" class="clip cell " style="left:672px;top:185px" data-start="4.16" data-duration="51.97" data-track-index="1">4</div>
+      <div id="z4" class="clip cell " style="left:756px;top:185px" data-start="4.28" data-duration="51.85" data-track-index="1">=</div>
+      <div id="z5" class="clip cell quot" style="left:840px;top:185px" data-start="10.1" data-duration="46.03" data-track-index="1">3</div>
+      <div id="z6" class="clip cell minus" style="left:336px;top:277px" data-start="11.8" data-duration="44.33" data-track-index="1">−</div>
+      <div id="z7" class="clip cell " style="left:420px;top:277px" data-start="11.8" data-duration="44.33" data-track-index="1">1</div>
+      <div id="z8" class="clip cell " style="left:504px;top:277px" data-start="11.95" data-duration="44.18" data-track-index="1">2</div>
+      <div id="l9" class="clip rule" style="left:420px;top:365px;width:168px" data-start="13.5" data-duration="42.63" data-track-index="1"></div>
+      <div id="z10" class="clip cell rest" style="left:504px;top:369px" data-start="15.8" data-duration="40.33" data-track-index="1">1</div>
+      <div id="z11" class="clip cell quot comma" style="left:892.08px;top:185px" data-start="21.6" data-duration="34.53" data-track-index="1">,</div>
+      <div id="z12" class="clip cell drop" style="left:588px;top:369px" data-start="23.2" data-duration="32.93" data-track-index="1">0</div>
+      <div id="z13" class="clip cell quot" style="left:945px;top:185px" data-start="28.69" data-duration="27.44" data-track-index="1">2</div>
+      <div id="z14" class="clip cell minus" style="left:504px;top:461px" data-start="31.09" data-duration="25.04" data-track-index="1">−</div>
+      <div id="z15" class="clip cell " style="left:588px;top:461px" data-start="31.09" data-duration="25.04" data-track-index="1">8</div>
+      <div id="l16" class="clip rule" style="left:504px;top:549px;width:168px" data-start="32.39" data-duration="23.74" data-track-index="1"></div>
+      <div id="z17" class="clip cell rest" style="left:588px;top:553px" data-start="33.19" data-duration="22.94" data-track-index="1">2</div>
+      <div id="z18" class="clip cell drop" style="left:672px;top:553px" data-start="35.96" data-duration="20.17" data-track-index="1">0</div>
+      <div id="z19" class="clip cell quot" style="left:1029px;top:185px" data-start="38.36" data-duration="17.77" data-track-index="1">5</div>
+      <div id="z20" class="clip cell minus" style="left:504px;top:645px" data-start="39.36" data-duration="16.77" data-track-index="1">−</div>
+      <div id="z21" class="clip cell " style="left:588px;top:645px" data-start="39.36" data-duration="16.77" data-track-index="1">2</div>
+      <div id="z22" class="clip cell " style="left:672px;top:645px" data-start="39.51" data-duration="16.62" data-track-index="1">0</div>
+      <div id="l23" class="clip rule" style="left:588px;top:733px;width:168px" data-start="40.26" data-duration="15.87" data-track-index="1"></div>
+      <div id="z24" class="clip cell rest" style="left:672px;top:737px" data-start="40.86" data-duration="15.27" data-track-index="1">0</div>
+      <div id="st0" class="clip step" style="left:1310px;top:250px" data-start="5.4" data-duration="50.73" data-track-index="1"><em>1</em>Teilen</div>
+      <div id="st1" class="clip step" style="left:1310px;top:382px" data-start="5.4" data-duration="50.73" data-track-index="1"><em>2</em>Malnehmen</div>
+      <div id="st2" class="clip step" style="left:1310px;top:514px" data-start="5.4" data-duration="50.73" data-track-index="1"><em>3</em>Abziehen</div>
+      <div id="st3" class="clip step" style="left:1310px;top:646px" data-start="5.4" data-duration="50.73" data-track-index="1"><em>4</em>Herunterholen</div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#cap0", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.8);
+      tl.to("#cap0", { opacity: 0, duration: 0.25, ease: "power1.in" }, 3.05);
+      tl.fromTo("#cap1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 3.3);
+      tl.to("#cap1", { opacity: 0, duration: 0.25, ease: "power1.in" }, 6.75);
+      tl.fromTo("#cap2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 7.2);
+      tl.to("#cap2", { opacity: 0, duration: 0.25, ease: "power1.in" }, 10.6);
+      tl.fromTo("#cap3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 10.85);
+      tl.to("#cap3", { opacity: 0, duration: 0.25, ease: "power1.in" }, 12.75);
+      tl.fromTo("#cap4", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 13);
+      tl.to("#cap4", { opacity: 0, duration: 0.25, ease: "power1.in" }, 17.15);
+      tl.fromTo("#cap5", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 17.6);
+      tl.to("#cap5", { opacity: 0, duration: 0.25, ease: "power1.in" }, 19.55);
+      tl.fromTo("#cap6", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 19.8);
+      tl.to("#cap6", { opacity: 0, duration: 0.25, ease: "power1.in" }, 24.15);
+      tl.fromTo("#cap7", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 24.4);
+      tl.to("#cap7", { opacity: 0, duration: 0.25, ease: "power1.in" }, 26.74);
+      tl.fromTo("#cap8", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 27.19);
+      tl.to("#cap8", { opacity: 0, duration: 0.25, ease: "power1.in" }, 29.54);
+      tl.fromTo("#cap9", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 29.79);
+      tl.to("#cap9", { opacity: 0, duration: 0.25, ease: "power1.in" }, 31.74);
+      tl.fromTo("#cap10", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 31.99);
+      tl.to("#cap10", { opacity: 0, duration: 0.25, ease: "power1.in" }, 34.11);
+      tl.fromTo("#cap11", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 34.56);
+      tl.to("#cap11", { opacity: 0, duration: 0.25, ease: "power1.in" }, 36.56);
+      tl.fromTo("#cap12", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 36.81);
+      tl.to("#cap12", { opacity: 0, duration: 0.25, ease: "power1.in" }, 39.56);
+      tl.fromTo("#cap13", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 39.81);
+      tl.to("#cap13", { opacity: 0, duration: 0.25, ease: "power1.in" }, 42.83);
+      tl.fromTo("#cap14", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 43.28);
+      tl.to("#cap14", { opacity: 0, duration: 0.25, ease: "power1.in" }, 46.68);
+      tl.fromTo("#cap15", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 46.93);
+      tl.to("#cap15", { opacity: 0, duration: 0.25, ease: "power1.in" }, 52.68);
+      tl.fromTo("#head", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+      tl.fromTo("#owl", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.4);
+      tl.fromTo("#z0", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 3.8);
+      tl.fromTo("#z1", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 3.92);
+      tl.fromTo("#z2", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 4.04);
+      tl.fromTo("#z3", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 4.16);
+      tl.fromTo("#z4", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 4.28);
+      tl.fromTo("#z5", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 10.1);
+      tl.fromTo("#z6", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 11.8);
+      tl.fromTo("#z7", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 11.8);
+      tl.fromTo("#z8", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 11.95);
+      tl.fromTo("#l9", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power2.out" }, 13.5);
+      tl.fromTo("#z10", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 15.8);
+      tl.fromTo("#z11", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 21.6);
+      tl.fromTo("#z12", { opacity: 0, y: -184 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.inOut" }, 23.2);
+      tl.fromTo("#z13", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 28.69);
+      tl.fromTo("#z14", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 31.09);
+      tl.fromTo("#z15", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 31.09);
+      tl.fromTo("#l16", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power2.out" }, 32.39);
+      tl.fromTo("#z17", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 33.19);
+      tl.fromTo("#z18", { opacity: 0, y: -368 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.inOut" }, 35.96);
+      tl.fromTo("#z19", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 38.36);
+      tl.fromTo("#z20", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 39.36);
+      tl.fromTo("#z21", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 39.36);
+      tl.fromTo("#z22", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 39.51);
+      tl.fromTo("#l23", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power2.out" }, 40.26);
+      tl.fromTo("#z24", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 40.86);
+      tl.to("#z5", { scale: 1.3, duration: 0.25, ease: "power2.out" }, 44.98);
+      tl.to("#z5", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 45.23);
+      tl.to("#z13", { scale: 1.3, duration: 0.25, ease: "power2.out" }, 45.43);
+      tl.to("#z13", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 45.68);
+      tl.to("#z19", { scale: 1.3, duration: 0.25, ease: "power2.out" }, 45.88);
+      tl.to("#z19", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 46.13);
+      tl.fromTo("#st0", { opacity: 0, x: 40 }, { opacity: 0.35, x: 0, duration: 0.4, ease: "power2.out" }, 5.4);
+      tl.fromTo("#st1", { opacity: 0, x: 40 }, { opacity: 0.35, x: 0, duration: 0.4, ease: "power2.out" }, 5.5);
+      tl.fromTo("#st2", { opacity: 0, x: 40 }, { opacity: 0.35, x: 0, duration: 0.4, ease: "power2.out" }, 5.6);
+      tl.fromTo("#st3", { opacity: 0, x: 40 }, { opacity: 0.35, x: 0, duration: 0.4, ease: "power2.out" }, 5.7);
+      tl.to("#st0", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 7.4);
+      tl.to("#st0", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 10.8);
+      tl.to("#st1", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 11.1);
+      tl.to("#st1", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 12.9);
+      tl.to("#st2", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 13.3);
+      tl.to("#st2", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 16.8);
+      tl.to("#st3", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 22.5);
+      tl.to("#st3", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 26.4);
+      tl.to("#st0", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 27.39);
+      tl.to("#st0", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 29.69);
+      tl.to("#st1", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 30.09);
+      tl.to("#st1", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 31.79);
+      tl.to("#st2", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 32.19);
+      tl.to("#st2", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 33.89);
+      tl.to("#st3", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 34.76);
+      tl.to("#st3", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 36.66);
+      tl.to("#st0", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 37.06);
+      tl.to("#st0", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 39.06);
+      tl.to("#st1", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 39.26);
+      tl.to("#st1", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 40.06);
+      tl.to("#st2", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 40.26);
+      tl.to("#st2", { opacity: 0.35, scale: 1, duration: 0.3, ease: "power2.in" }, 42.46);
+      tl.to("#st0", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 48.28);
+      tl.to("#st1", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 49.18);
+      tl.to("#st2", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 50.28);
+      tl.to("#st3", { opacity: 1, scale: 1.06, duration: 0.25, ease: "power2.out" }, 51.38);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

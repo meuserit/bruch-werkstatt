@@ -1,0 +1,126 @@
+/* Bruch-Werkstatt – Ergänzungen für Mathe-Inhalte (baut auf style.css auf) */
+
+/* ───── Brüche ───── */
+.frac {
+  display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;
+  line-height: 1.05; margin: 0 0.12em; font-size: 0.86em; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.frac > span:first-child { border-bottom: 0.11em solid currentColor; padding: 0 0.22em 0.06em; }
+.frac > span:last-child { padding: 0.06em 0.22em 0; }
+
+/* ───── Kopfzeile mit sieben Stationen ───── */
+.many-steps .step-label { font-size: 0.88rem; }
+@media (max-width: 1500px) {
+  .many-steps .step-label { display: none; }
+  .many-steps .step { padding: 0.2rem; }
+  .many-steps .step.is-current .step-label { display: inline; padding-right: 0.5rem; }
+}
+
+/* ───── Streifen-Bilder ───── */
+.figbar { display: flex; height: 3.2rem; border: 3px solid var(--ink); border-radius: 12px; overflow: hidden; background: var(--card); }
+.figbar i { flex: 1; border-right: 3px solid var(--ink); }
+.figbar i:last-child { border-right: 0; }
+.figbar i.on { background: #e8873f; }
+.figcap { font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.4rem; text-align: center; }
+
+.explain { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); }
+.bigfrac { display: grid; gap: 0.35rem; }
+.bigfrac > div { display: grid; grid-template-columns: 3.4rem 1fr; align-items: center; gap: 0.9rem; }
+.bigfrac-no { font-family: var(--serif); font-weight: 800; font-size: 2.8rem; line-height: 1; text-align: center; color: var(--accent); }
+.bigfrac-line > span:first-child { height: 5px; border-radius: 3px; background: var(--ink); }
+.bigfrac-word { font-size: 1rem; }
+.bigfrac-line .bigfrac-word { color: var(--ink-soft); font-size: 0.9rem; }
+
+.equal { display: grid; gap: 0.6rem; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--shadow); }
+.equal-row { display: grid; grid-template-columns: 1fr 3.5rem; gap: 1rem; align-items: center; }
+.equal-row > span { font-family: var(--serif); font-size: 1.5rem; text-align: center; }
+.equal .figbar { height: 2.6rem; }
+
+/* ───── Regel-Karten ───── */
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem; margin-top: 1.25rem; }
+.rule { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); }
+.rule-title { font-family: var(--serif); font-weight: 800; font-size: 1.2rem; color: var(--accent); margin-bottom: 0.3rem; }
+.rule-ex { margin-top: 0.7rem; padding-top: 0.7rem; border-top: 2px dashed var(--line); font-family: var(--serif); font-size: 1.35rem; font-weight: 700; line-height: 2; }
+pre.rule-ex.column { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 1.25rem; line-height: 1.35; margin: 0.7rem 0 0; white-space: pre; }
+
+/* ───── Zahlenstrahl ───── */
+.numline { position: relative; height: 5.2rem; margin: 1.6rem 1.5rem 0.4rem; }
+.numline-axis { position: absolute; left: 0; right: 0; top: 0.9rem; height: 5px; border-radius: 3px; background: var(--ink); }
+.numline > span { position: absolute; top: 0; transform: translateX(-50%); padding-top: 2.1rem; font-family: var(--serif); font-weight: 800; font-size: 1.25rem; text-align: center; }
+.numline > span::before { content: ""; position: absolute; left: 50%; top: 0.25rem; width: 5px; height: 1.6rem; margin-left: -2.5px; border-radius: 3px; background: var(--accent); }
+
+/* ───── Stellenwerttafel ───── */
+.places { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); text-align: center; }
+.places caption { caption-side: bottom; padding-top: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+.places th { padding: 0.6rem 0.3rem; font-size: 0.9rem; background: var(--paper-deep); border-bottom: 2px solid var(--line); line-height: 1.5; }
+.places td { padding: 0.5rem 0.3rem; font-family: var(--serif); font-weight: 800; font-size: 2.2rem; }
+.places th + th, .places td + td { border-left: 2px solid var(--line); }
+.places .comma { width: 2rem; border-left: 0 !important; color: var(--accent); background: transparent; }
+.places .comma + * { border-left: 0; }
+
+/* ───── Übung: Anteil färben ───── */
+.shade, .tasks { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.25rem 1.25rem; box-shadow: var(--shadow); }
+.task-count { font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
+.task-q { font-family: var(--serif); font-weight: 700; font-size: 1.5rem; margin-bottom: 1rem; }
+.shadebar { display: flex; height: 4.6rem; border: 3px solid var(--ink); border-radius: 14px; overflow: hidden; }
+.shadecell { flex: 1; min-width: 0; background: var(--card); border: 0; border-right: 3px solid var(--ink); padding: 0; transition: background 0.12s; }
+.shadecell:last-child { border-right: 0; }
+.shadecell:hover:not(:disabled) { background: #fde6d5; }
+.shadecell.is-on { background: #e8873f; }
+.shadecell:focus-visible { outline-offset: -5px; }
+
+/* ───── Aufgabenreihen ───── */
+.tasks .choices { gap: 0.6rem; }
+.tasks .choice { font-family: var(--serif); font-size: 1.3rem; padding: 0.6rem 1.1rem; }
+.tasks .choices:not(.choices-inline) { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.tasks .choices:not(.choices-inline) .choice { text-align: center; }
+.choices-inline { grid-template-columns: repeat(3, minmax(0, 6rem)); }
+.choices-inline .choice { text-align: center; font-size: 1.7rem; font-weight: 800; }
+.tasks .feedback { font-size: 1.05rem; }
+.actions-tight { margin-top: 0.9rem; }
+.quiz-q .frac, .choice .frac { font-size: 0.92em; }
+
+/* ───── Zuordnen ───── */
+.match-left, .match-right { justify-content: center; font-family: var(--serif); font-size: 1.35rem; min-height: 3.8rem; }
+
+@media (max-width: 600px) {
+  .explain { grid-template-columns: 1fr; }
+  .task-q { font-size: 1.3rem; }
+  .shadebar { height: 3.8rem; }
+  .places td { font-size: 1.7rem; }
+  .places th { font-size: 0.72rem; }
+  .numline { margin-left: 1rem; margin-right: 1rem; }
+}
+
+/* ───── Station 5: Dezimalzahlen vergleichen ───── */
+.steps-list, .fourstep { display: grid; gap: 0.6rem; margin-bottom: 1.25rem; }
+.steps-list p, .fourstep p { display: flex; align-items: center; gap: 0.9rem; margin: 0; background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 0.65rem 1rem; }
+.fourstep { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 1.25rem; margin-bottom: 0; }
+.fourstep p { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.8rem; align-items: center; }
+.fourstep .part-no { grid-row: span 2; }
+.fourstep b { font-family: var(--serif); font-size: 1.15rem; }
+.fourstep p > span:last-child { font-size: 0.92rem; color: var(--ink-soft); }
+.places.compare .win { background: var(--green-soft); color: var(--green); }
+.places.compare .lose { background: var(--red-soft); color: var(--red); }
+.places.compare .fill0 { color: #b9a47c; }
+.places.compare .verdict { font-size: 1.5rem; color: var(--green); white-space: nowrap; padding: 0 0.8rem; }
+.numline-dec > span { font-size: 1.05rem; font-family: var(--sans); }
+.numline-dec > span.mark { color: var(--accent); }
+.numline-dec > span:not(.mark)::before { background: var(--ink); height: 1.1rem; top: 0.5rem; }
+
+.sort { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.25rem 1.25rem; box-shadow: var(--shadow); }
+.sort-pool { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.sort-chip { background: #fde6d5; border: 2px solid var(--accent); border-radius: 14px; padding: 0.5rem 1.1rem; font-family: var(--serif); font-weight: 800; font-size: 1.5rem; box-shadow: 0 4px 0 var(--accent-dark); font-variant-numeric: tabular-nums; }
+.sort-chip.is-used { background: var(--paper-deep); border-color: var(--line); color: #b9a47c; box-shadow: none; }
+.sort-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; min-height: 3.4rem; margin-top: 1rem; padding: 0.5rem 0.8rem; border: 2px dashed #c9b07a; border-radius: 14px; }
+.sort-done { background: var(--green-soft); border: 2px solid var(--green); border-radius: 12px; padding: 0.25rem 0.8rem; font-family: var(--serif); font-weight: 800; font-size: 1.35rem; }
+.sort-lt { font-weight: 900; font-size: 1.4rem; color: var(--green); }
+
+/* ───── Station 7: Schriftlich dividieren ───── */
+.tasks .choices:not(.choices-inline) .choice { font-size: 1.15rem; }
+@media (max-width: 600px) {
+  .places.compare .verdict { font-size: 1.05rem; padding: 0 0.3rem; }
+}
+
+.fourstep b { font-size: 1rem; }
+.fourstep p { padding: 0.6rem 0.7rem; }

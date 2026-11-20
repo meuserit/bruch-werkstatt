@@ -1,0 +1,172 @@
+<!doctype html>
+<!-- Automatisch erzeugt von build.mjs – bitte dort ändern, nicht hier. -->
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Nunito"; src: url("assets/fonts/nunito-latin-wght-normal.woff2") format("woff2"); font-weight: 200 1000; }
+      :root { --paper: #fff6e0; --ink: #3a2412; --accent: #c2541b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1c120a; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: "Nunito", sans-serif; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1; margin: 0 0.12em; font-variant-numeric: tabular-nums; }
+      .frac span:first-child { border-bottom: 0.08em solid currentColor; padding: 0 0.14em 0.06em; }
+      .frac span:last-child { padding: 0.06em 0.14em 0; }
+      .title { position: absolute; z-index: 20; left: 0; right: 0; top: 90px; text-align: center; color: var(--ink); }
+      .title-main { font-family: "Fraunces", serif; font-weight: 800; font-size: 150px; line-height: 1.04; letter-spacing: -0.02em; color: var(--paper); text-shadow: 0 6px 0 rgba(58, 36, 18, 0.55), 0 14px 40px rgba(58, 36, 18, 0.5); }
+      .title-sub { margin-top: 34px; display: inline-block; font-size: 46px; font-weight: 800; color: var(--ink); background: var(--paper); padding: 12px 36px; border-radius: 999px; }
+      .badge { position: absolute; z-index: 30; display: flex; align-items: center; font-size: 56px; font-weight: 900; color: var(--paper); background: var(--accent); padding: 16px 40px; border-radius: 28px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); white-space: nowrap; }
+      .badge .frac { font-size: 0.8em; margin: 0 0.3em; }
+      .cap { position: absolute; z-index: 40; left: 160px; right: 160px; bottom: 64px; display: flex; justify-content: center; }
+      .cap span { display: block; max-width: 1600px; background: rgba(255, 246, 224, 0.95); color: var(--ink); font-family: "Fraunces", serif; font-weight: 600; font-size: 52px; line-height: 1.28; text-align: center; padding: 26px 52px; border-radius: 32px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); }
+      .moral { position: absolute; z-index: 50; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(40, 20, 8, 0.62); }
+      .moral-card { width: 1640px; background: var(--paper); border-radius: 48px; padding: 70px 70px 80px; text-align: center; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5); color: var(--ink); }
+      .moral-kicker { display: inline-block; font-size: 40px; font-weight: 900; color: var(--paper); background: var(--accent); padding: 12px 36px; border-radius: 999px; margin-bottom: 60px; }
+      .moral-eq { font-family: "Fraunces", serif; font-weight: 700; font-size: 92px; white-space: nowrap; }
+      .moral-eq > span { display: inline-block; }
+      .moral-strong { color: var(--accent); font-weight: 900; }
+      .moral-note { margin-top: 60px; font-size: 50px; font-weight: 800; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="102.1" data-width="1920" data-height="1080">
+      <div id="s1" class="clip scene" style="z-index:1" data-start="0" data-duration="5.95" data-track-index="0"><img id="bg1" class="bg" src="assets/szene1.jpg" alt="" /></div>
+      <audio id="a1" src="assets/szene1.mp3" data-start="0.6" data-duration="4.05" data-track-index="5" data-volume="1"></audio>
+      <div id="s2" class="clip scene" style="z-index:2" data-start="5.35" data-duration="13.86" data-track-index="0"><img id="bg2" class="bg" src="assets/szene2.jpg" alt="" /></div>
+      <audio id="a2" src="assets/szene2.mp3" data-start="5.95" data-duration="11.96" data-track-index="5" data-volume="1"></audio>
+      <div id="s3" class="clip scene" style="z-index:3" data-start="18.61" data-duration="13.29" data-track-index="0"><img id="bg3" class="bg" src="assets/szene3.jpg" alt="" /></div>
+      <audio id="a3" src="assets/szene3.mp3" data-start="19.21" data-duration="11.39" data-track-index="5" data-volume="1"></audio>
+      <div id="s4" class="clip scene" style="z-index:4" data-start="31.3" data-duration="14.9" data-track-index="0"><img id="bg4" class="bg" src="assets/szene4.jpg" alt="" /></div>
+      <audio id="a4" src="assets/szene4.mp3" data-start="31.9" data-duration="13" data-track-index="5" data-volume="1"></audio>
+      <div id="s5" class="clip scene" style="z-index:5" data-start="45.6" data-duration="14.18" data-track-index="0"><img id="bg5" class="bg" src="assets/szene5.jpg" alt="" /></div>
+      <audio id="a5" src="assets/szene5.mp3" data-start="46.2" data-duration="12.28" data-track-index="5" data-volume="1"></audio>
+      <div id="s6" class="clip scene" style="z-index:6" data-start="59.18" data-duration="14.9" data-track-index="0"><img id="bg6" class="bg" src="assets/szene6.jpg" alt="" /></div>
+      <audio id="a6" src="assets/szene6.mp3" data-start="59.78" data-duration="13" data-track-index="5" data-volume="1"></audio>
+      <div id="s7" class="clip scene" style="z-index:7" data-start="73.48" data-duration="28.62" data-track-index="0"><img id="bg7" class="bg" src="assets/szene7.jpg" alt="" /></div>
+      <audio id="a7" src="assets/szene7.mp3" data-start="74.08" data-duration="10.76" data-track-index="5" data-volume="1"></audio>
+      <div id="title" class="clip title" data-start="0" data-duration="5.35" data-track-index="1"><div id="title-main" class="title-main">Die siebzehn Kamele</div><div id="title-sub" class="title-sub">Eine Geschichte über Brüche</div></div>
+      <div id="badge0" class="clip badge" style="right:70px;top:60px" data-start="12.55" data-duration="6.06" data-track-index="2">17 Kamele</div>
+      <div id="cap0" class="clip cap" data-start="5.95" data-duration="4.1" data-track-index="3"><span>Vor langer Zeit lebte in der Wüste ein alter Kamelhändler.</span></div>
+      <div id="cap1" class="clip cap" data-start="10.05" data-duration="8.21" data-track-index="3"><span>Als er starb, hinterließ er seinen drei Kindern siebzehn Kamele – und ein rätselhaftes Testament.</span></div>
+      <div id="badge1" class="clip badge" style="left:60px;top:60px" data-start="22.71" data-duration="8.59" data-track-index="2">Amira <span class="frac"><span>1</span><span>2</span></span></div>
+      <div id="badge2" class="clip badge" style="left:420px;top:60px" data-start="25.61" data-duration="5.69" data-track-index="2">Karim <span class="frac"><span>1</span><span>3</span></span></div>
+      <div id="badge3" class="clip badge" style="left:780px;top:60px" data-start="29.11" data-duration="2.19" data-track-index="2">Leila <span class="frac"><span>1</span><span>9</span></span></div>
+      <div id="cap2" class="clip cap" data-start="19.21" data-duration="5.65" data-track-index="3"><span>Darin stand: Amira, die Älteste, bekommt die Hälfte der Kamele.</span></div>
+      <div id="cap3" class="clip cap" data-start="24.86" data-duration="2.2" data-track-index="3"><span>Karim bekommt ein Drittel.</span></div>
+      <div id="cap4" class="clip cap" data-start="27.06" data-duration="3.89" data-track-index="3"><span>Und Leila, die Jüngste, bekommt ein Neuntel.</span></div>
+      <div id="badge4" class="clip badge" style="left:60px;top:60px" data-start="36.8" data-duration="8.8" data-track-index="2">17 : 2 = 8,5 ?</div>
+      <div id="cap5" class="clip cap" data-start="31.9" data-duration="2.8" data-track-index="3"><span>Die drei rechneten und rechneten.</span></div>
+      <div id="cap6" class="clip cap" data-start="34.7" data-duration="4.6" data-track-index="3"><span>Die Hälfte von siebzehn? Das wären achteinhalb Kamele!</span></div>
+      <div id="cap7" class="clip cap" data-start="39.3" data-duration="3.65" data-track-index="3"><span>„Wir können doch kein Kamel zerteilen!“, rief Karim.</span></div>
+      <div id="cap8" class="clip cap" data-start="42.95" data-duration="2.3" data-track-index="3"><span>Bald stritten sie laut.</span></div>
+      <div id="badge5" class="clip badge" style="left:60px;top:60px" data-start="56.4" data-duration="2.78" data-track-index="2">17 + 1 = 18</div>
+      <div id="cap9" class="clip cap" data-start="46.2" data-duration="4.2" data-track-index="3"><span>Da kam eine weise alte Frau auf ihrem Kamel vorbeigeritten.</span></div>
+      <div id="cap10" class="clip cap" data-start="50.4" data-duration="3.9" data-track-index="3"><span>Sie hörte sich alles an, lächelte und sagte:</span></div>
+      <div id="cap11" class="clip cap" data-start="54.3" data-duration="4.53" data-track-index="3"><span>„Ich leihe euch mein Kamel. Dann sind es achtzehn.“</span></div>
+      <div id="badge6" class="clip badge" style="left:60px;top:60px" data-start="64.28" data-duration="9.2" data-track-index="2"><span class="frac"><span>1</span><span>2</span></span> von 18 = 9</div>
+      <div id="badge7" class="clip badge" style="left:700px;top:60px" data-start="67.78" data-duration="5.7" data-track-index="2"><span class="frac"><span>1</span><span>3</span></span> von 18 = 6</div>
+      <div id="badge8" class="clip badge" style="left:1340px;top:60px" data-start="71.38" data-duration="2.1" data-track-index="2"><span class="frac"><span>1</span><span>9</span></span> von 18 = 2</div>
+      <div id="cap12" class="clip cap" data-start="59.78" data-duration="1.75" data-track-index="3"><span>Nun ging alles auf:</span></div>
+      <div id="cap13" class="clip cap" data-start="61.53" data-duration="4.35" data-track-index="3"><span>Amira bekam die Hälfte von achtzehn – neun Kamele.</span></div>
+      <div id="cap14" class="clip cap" data-start="65.88" data-duration="3.35" data-track-index="3"><span>Karim bekam ein Drittel – sechs Kamele.</span></div>
+      <div id="cap15" class="clip cap" data-start="69.23" data-duration="3.9" data-track-index="3"><span>Und Leila bekam ein Neuntel – zwei Kamele.</span></div>
+      <div id="badge9" class="clip badge" style="left:60px;top:60px" data-start="76.48" data-duration="9.06" data-track-index="2">9 + 6 + 2 = 17</div>
+      <div id="cap16" class="clip cap" data-start="74.08" data-duration="3.6" data-track-index="3"><span>Neun plus sechs plus zwei – das sind siebzehn.</span></div>
+      <div id="cap17" class="clip cap" data-start="77.68" data-duration="2.25" data-track-index="3"><span>Ein Kamel blieb übrig!</span></div>
+      <div id="cap18" class="clip cap" data-start="79.93" data-duration="5.26" data-track-index="3"><span>Die weise Frau stieg wieder auf ihr Kamel, winkte und ritt davon.</span></div>
+      <div id="moral" class="clip moral" data-start="85.54" data-duration="16.56" data-track-index="4"><div class="moral-card"><div id="m-kicker" class="moral-kicker">Das Geheimnis</div><div class="moral-eq"><span id="m-1"><span class="frac"><span>1</span><span>2</span></span> + <span class="frac"><span>1</span><span>3</span></span> + <span class="frac"><span>1</span><span>9</span></span></span><span id="m-2"> = <span class="frac"><span>9</span><span>18</span></span> + <span class="frac"><span>6</span><span>18</span></span> + <span class="frac"><span>2</span><span>18</span></span></span><span id="m-3" class="moral-strong"> = <span class="frac"><span>17</span><span>18</span></span></span></div><div id="m-4" class="moral-note">Ein Achtzehntel fehlt zum Ganzen – genau das geliehene Kamel!</div></div></div>
+      <audio id="a8" src="assets/szene8.mp3" data-start="86.14" data-duration="11.96" data-track-index="5" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bg1", { scale: 1, x: 0, y: 0 }, { scale: 1.08, x: -30, y: 0, duration: 5.95, ease: "none" }, 0);
+      tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 5.35);
+      tl.fromTo("#bg2", { scale: 1.1, x: 30, y: 0 }, { scale: 1, x: 0, y: 0, duration: 13.86, ease: "none" }, 5.35);
+      tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 18.61);
+      tl.fromTo("#bg3", { scale: 1, x: 0, y: 0 }, { scale: 1.08, x: 0, y: -20, duration: 13.29, ease: "none" }, 18.61);
+      tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 31.3);
+      tl.fromTo("#bg4", { scale: 1.08, x: -20, y: 0 }, { scale: 1, x: 0, y: 0, duration: 14.9, ease: "none" }, 31.3);
+      tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 45.6);
+      tl.fromTo("#bg5", { scale: 1, x: 0, y: 0 }, { scale: 1.1, x: -50, y: -10, duration: 14.18, ease: "none" }, 45.6);
+      tl.fromTo("#s6", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 59.18);
+      tl.fromTo("#bg6", { scale: 1, x: 0, y: 0 }, { scale: 1.05, x: 0, y: -10, duration: 14.9, ease: "none" }, 59.18);
+      tl.fromTo("#s7", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 73.48);
+      tl.fromTo("#bg7", { scale: 1.08, x: 30, y: 0 }, { scale: 1, x: 0, y: 0, duration: 28.62, ease: "none" }, 73.48);
+      tl.fromTo("#title-main", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 1.4);
+      tl.to("#title", { opacity: 0, duration: 0.5, ease: "power1.in" }, 4.85);
+      tl.fromTo("#badge0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 12.55);
+      tl.to("#badge0", { opacity: 0, duration: 0.4, ease: "power1.in" }, 18.21);
+      tl.fromTo("#cap0", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 5.95);
+      tl.to("#cap0", { opacity: 0, duration: 0.25, ease: "power1.in" }, 9.8);
+      tl.fromTo("#cap1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 10.05);
+      tl.to("#cap1", { opacity: 0, duration: 0.25, ease: "power1.in" }, 18.01);
+      tl.fromTo("#badge1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 22.71);
+      tl.to("#badge1", { opacity: 0, duration: 0.4, ease: "power1.in" }, 30.9);
+      tl.fromTo("#badge2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 25.61);
+      tl.to("#badge2", { opacity: 0, duration: 0.4, ease: "power1.in" }, 30.9);
+      tl.fromTo("#badge3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 29.11);
+      tl.to("#badge3", { opacity: 0, duration: 0.4, ease: "power1.in" }, 30.9);
+      tl.fromTo("#cap2", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 19.21);
+      tl.to("#cap2", { opacity: 0, duration: 0.25, ease: "power1.in" }, 24.61);
+      tl.fromTo("#cap3", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 24.86);
+      tl.to("#cap3", { opacity: 0, duration: 0.25, ease: "power1.in" }, 26.81);
+      tl.fromTo("#cap4", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 27.06);
+      tl.to("#cap4", { opacity: 0, duration: 0.25, ease: "power1.in" }, 30.7);
+      tl.fromTo("#badge4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 36.8);
+      tl.to("#badge4", { opacity: 0, duration: 0.4, ease: "power1.in" }, 45.2);
+      tl.fromTo("#cap5", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 31.9);
+      tl.to("#cap5", { opacity: 0, duration: 0.25, ease: "power1.in" }, 34.45);
+      tl.fromTo("#cap6", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 34.7);
+      tl.to("#cap6", { opacity: 0, duration: 0.25, ease: "power1.in" }, 39.05);
+      tl.fromTo("#cap7", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 39.3);
+      tl.to("#cap7", { opacity: 0, duration: 0.25, ease: "power1.in" }, 42.7);
+      tl.fromTo("#cap8", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 42.95);
+      tl.to("#cap8", { opacity: 0, duration: 0.25, ease: "power1.in" }, 45);
+      tl.fromTo("#badge5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 56.4);
+      tl.to("#badge5", { opacity: 0, duration: 0.4, ease: "power1.in" }, 58.78);
+      tl.fromTo("#cap9", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 46.2);
+      tl.to("#cap9", { opacity: 0, duration: 0.25, ease: "power1.in" }, 50.15);
+      tl.fromTo("#cap10", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 50.4);
+      tl.to("#cap10", { opacity: 0, duration: 0.25, ease: "power1.in" }, 54.05);
+      tl.fromTo("#cap11", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 54.3);
+      tl.to("#cap11", { opacity: 0, duration: 0.25, ease: "power1.in" }, 58.58);
+      tl.fromTo("#badge6", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 64.28);
+      tl.to("#badge6", { opacity: 0, duration: 0.4, ease: "power1.in" }, 73.08);
+      tl.fromTo("#badge7", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 67.78);
+      tl.to("#badge7", { opacity: 0, duration: 0.4, ease: "power1.in" }, 73.08);
+      tl.fromTo("#badge8", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 71.38);
+      tl.to("#badge8", { opacity: 0, duration: 0.4, ease: "power1.in" }, 73.08);
+      tl.fromTo("#cap12", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 59.78);
+      tl.to("#cap12", { opacity: 0, duration: 0.25, ease: "power1.in" }, 61.28);
+      tl.fromTo("#cap13", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 61.53);
+      tl.to("#cap13", { opacity: 0, duration: 0.25, ease: "power1.in" }, 65.63);
+      tl.fromTo("#cap14", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 65.88);
+      tl.to("#cap14", { opacity: 0, duration: 0.25, ease: "power1.in" }, 68.98);
+      tl.fromTo("#cap15", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 69.23);
+      tl.to("#cap15", { opacity: 0, duration: 0.25, ease: "power1.in" }, 72.88);
+      tl.fromTo("#badge9", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 76.48);
+      tl.to("#badge9", { opacity: 0, duration: 0.4, ease: "power1.in" }, 85.14);
+      tl.fromTo("#cap16", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 74.08);
+      tl.to("#cap16", { opacity: 0, duration: 0.25, ease: "power1.in" }, 77.43);
+      tl.fromTo("#cap17", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 77.68);
+      tl.to("#cap17", { opacity: 0, duration: 0.25, ease: "power1.in" }, 79.68);
+      tl.fromTo("#cap18", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 79.93);
+      tl.to("#cap18", { opacity: 0, duration: 0.25, ease: "power1.in" }, 84.94);
+      tl.fromTo("#moral", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 85.54);
+      tl.fromTo("#m-kicker", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 86.34);
+      tl.fromTo("#m-1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 90.64);
+      tl.fromTo("#m-2", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power3.out" }, 93.74);
+      tl.fromTo("#m-3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.6)" }, 95.74);
+      tl.fromTo("#m-4", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 98.4);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

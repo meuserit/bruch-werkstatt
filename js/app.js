@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var VERSION = "1.0.0";
+  var VERSION = "1.1.0";
   var STORE_KEY = "bruchwerkstatt.v1";
   var LAST = 9; // Nummer der letzten Station (Quiz)
 
@@ -567,6 +567,8 @@
     box.appendChild(card);
     box.appendChild(owlRow(img, "Herr Uhu", lines));
 
+    box.appendChild(songCard());
+
     var actions = el("div", "actions");
     var again = el("button", "btn btn-primary", "Quiz noch einmal spielen");
     again.addEventListener("click", function () { startQuiz(true); });
@@ -575,6 +577,50 @@
     actions.appendChild(again);
     actions.appendChild(home);
     box.appendChild(actions);
+  }
+
+  /* ---------- Abschluss: das Bruch-Lied ---------- */
+  var REFRAIN = ["Oben der Zähler, unten der Nenner,", "wir sind die Bruch- und Komma-Kenner!", "Erweitern, kürzen, gleichnamig machen –", "so lassen wir die Brüche krachen!"];
+  var SONG = [
+    ["Strophe 1", ["Ein Bruch, der hat zwei Zahlen, das ist doch gar nicht schwer:", "Der Nenner zählt die Teile, der Zähler: Wie viel nehm ich her?", "Drei Viertel von der Pizza, ein Halbes vom Kakao –", "wer Brüche lesen kann, der teilt gerecht und schlau."]],
+    ["Refrain", REFRAIN],
+    ["Strophe 2", ["Willst du zwei Brüche addieren, dann schau die Nenner an:", "Sind sie verschieden, mach sie gleich, erst dann sind die Zähler dran.", "Ein Halb ist null Komma fünf, ein Viertel null Komma zwei fünf,", "ob Bruch, ob Komma, ganz egal – es bleibt dieselbe Zahl."]],
+    ["Refrain", null],
+    ["Bridge", ["Siebzehn Kamele im Wüstensand,", "ein Halb, ein Drittel, ein Neuntel – wer hätt’s erkannt?", "Zusammen ist das gar kein Ganzes, nein:", "Siebzehn Achtzehntel – so muss es sein!"]],
+    ["Refrain", null],
+    ["Schluss", ["Oben der Zähler, unten der Nenner!"]]
+  ];
+
+  function songCard() {
+    var card = el("section", "song");
+    card.appendChild(el("p", "kicker", "Zum Abschluss"));
+    card.appendChild(el("h3", "song-title", "Das Bruch-Lied: „Bruchstark“"));
+    card.appendChild(el("p", "hint", "Geschafft! Zur Belohnung gibt es ein Lied zum Mitsingen – mit Zähler, Nenner und den siebzehn Kamelen."));
+    var audio = el("audio", "song-player");
+    audio.controls = true;
+    audio.preload = "none";
+    audio.src = "assets/audio/bruchstark.mp3";
+    card.appendChild(audio);
+    var det = el("details", "readalong");
+    det.appendChild(el("summary", null, "Text zum Mitsingen"));
+    var body = el("div", "lyrics");
+    SONG.forEach(function (part) {
+      body.appendChild(el("p", "lyrics-part", part[0]));
+      var p = el("p", "lyrics-lines");
+      if (part[1]) {
+        part[1].forEach(function (line, i) {
+          if (i) p.appendChild(document.createElement("br"));
+          p.appendChild(document.createTextNode(line));
+        });
+      } else {
+        p.textContent = REFRAIN[0] + " …";
+        p.classList.add("is-repeat");
+      }
+      body.appendChild(p);
+    });
+    det.appendChild(body);
+    card.appendChild(det);
+    return card;
   }
 
   function confetti() {

@@ -1,6 +1,6 @@
 # Bruch-Werkstatt
 
-Interaktive Lern-WebApp für die **6. Klasse** (Mathematik, NRW, 1. Halbjahr) zum Thema **Brüche und Dezimalzahlen** – Version **1.0.0**
+Interaktive Lern-WebApp für die **6. Klasse** (Mathematik, NRW, 1. Halbjahr) zum Thema **Brüche und Dezimalzahlen** – Version **1.1.0**
 
 Die App führt in neun kurzen Stationen durch das Thema. Lehrer-Eule **Herr Uhu** erklärt, lobt und ermutigt.
 
@@ -14,7 +14,7 @@ Die App führt in neun kurzen Stationen durch das Thema. Lehrer-Eule **Herr Uhu*
 | 6 · Plus und Minus | Addieren und Subtrahieren von Brüchen und Dezimalzahlen | **Erklärvideo** „Brüche addieren“ (49 s), 5 Aufgaben |
 | 7 · Schriftlich dividieren | Teilen – Malnehmen – Abziehen – Herunterholen, Komma im Ergebnis, Bruch als Division | **Erklärvideo** „13 : 4 = 3,25“ (56 s), geführte Rechnung 87 : 4, 4 Aufgaben |
 | 8 · Der Film | **„Die siebzehn Kamele“** – eine alte Rätselgeschichte (102 s) | Warum bleibt ein Kamel übrig? |
-| 9 · Das Quiz | 14 Fragen in zufälliger Reihenfolge | Rückmeldung von Herrn Uhu, Ergebnis mit Sternen |
+| 9 · Das Quiz | 14 Fragen in zufälliger Reihenfolge | Rückmeldung von Herrn Uhu, Ergebnis mit Sternen, zum Abschluss das Lied „Bruchstark“ mit Text zum Mitsingen |
 
 Multiplizieren und Dividieren von Brüchen (meist 2. Halbjahr) sind bewusst nicht enthalten; dividiert wird durch natürliche Zahlen.
 
@@ -36,6 +36,7 @@ css/mathe.css         Brüche, Streifen, Stellenwerttafel, Aufgaben
 js/app.js             Übungen, Quiz, Fortschritt (Versionsnummer: VERSION)
 assets/img            Illustrationen (Szenen, Herr Uhu)
 assets/video          Fertig gerenderte Videos
+assets/audio          Lied „Bruchstark“
 assets/fonts          Schriften Fraunces und Nunito
 film/                 Quelle des Films (Hyperframes-Komposition)
 erklaervideo/         Quelle des Erklärvideos „Brüche addieren“ (Hyperframes)
@@ -64,9 +65,12 @@ Voraussetzungen: Node.js 22+, FFmpeg, Chrome.
 
 - „Die siebzehn Kamele“: frei nacherzählte, überlieferte Rätselgeschichte (gemeinfrei).
 - Illustrationen und Sprecherstimme: KI-generiert mit Higgsfield (Bilder: GPT Image, Stimme: ElevenLabs).
+- Lied „Bruchstark“: Text eigens für die App geschrieben, Musik und Gesang KI-generiert mit Suno.
 - Schriften: Fraunces und Nunito (SIL Open Font License 1.1).
 - Animation: GSAP (jeweils im Ordner `vendor` der drei Video-Projekte, Standard-Lizenz von GSAP).
 
 ## Versionen
+
+- **1.1.0** – Lied „Bruchstark“ als Abschluss nach dem Quiz, mit Text zum Mitsingen.
 
 - **1.0.0** – Erste Fassung: neun Stationen, Erklärvideos „Brüche addieren“ und „Schriftlich dividieren“, Film „Die siebzehn Kamele“, Abschlussquiz mit Herrn Uhu.

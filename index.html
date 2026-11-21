@@ -6,8 +6,8 @@
     <title>Bruch-Werkstatt – Brüche und Dezimalzahlen (Klasse 6)</title>
     <meta name="description" content="Interaktive Lern-App für die 6. Klasse: Brüche und Dezimalzahlen verstehen, vergleichen, addieren, subtrahieren und schriftlich dividieren – mit Erklärvideos, Geschichte und Quiz." />
     <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="css/style.css?v=1.1.0" />
-    <link rel="stylesheet" href="css/mathe.css?v=1.1.0" />
+    <link rel="stylesheet" href="css/style.css?v=1.2.0" />
+    <link rel="stylesheet" href="css/mathe.css?v=1.2.0" />
   </head>
   <body class="many-steps">
     <header class="top">
@@ -23,8 +23,9 @@
         <button class="step" data-go="5"><span class="step-no">5</span><span class="step-label">Komma-Vergleich</span></button>
         <button class="step" data-go="6"><span class="step-no">6</span><span class="step-label">Plus und Minus</span></button>
         <button class="step" data-go="7"><span class="step-no">7</span><span class="step-label">Dividieren</span></button>
-        <button class="step" data-go="8"><span class="step-no">8</span><span class="step-label">Der Film</span></button>
-        <button class="step" data-go="9"><span class="step-no">9</span><span class="step-label">Das Quiz</span></button>
+        <button class="step" data-go="8"><span class="step-no">8</span><span class="step-label">Bruch gegen Komma</span></button>
+        <button class="step" data-go="9"><span class="step-no">9</span><span class="step-label">Der Film</span></button>
+        <button class="step" data-go="10"><span class="step-no">10</span><span class="step-label">Das Quiz</span></button>
       </nav>
     </header>
 
@@ -36,14 +37,27 @@
           <div class="hero-text">
             <p class="kicker">Mathematik · Klasse 6 · 1. Halbjahr</p>
             <h1>Brüche und Dezimalzahlen</h1>
-            <p class="lead">Eine halbe Pizza, ein Viertelliter Milch, 0,5 Liter Saft: Brüche und Kommazahlen begegnen dir jeden Tag. In neun Stationen lernst du, sie zu verstehen, zu vergleichen und mit ihnen zu rechnen.</p>
+            <p class="lead">Eine halbe Pizza, ein Viertelliter Milch, 0,5 Liter Saft: Brüche und Kommazahlen begegnen dir jeden Tag. In zehn Stationen lernst du, sie zu verstehen, zu vergleichen und mit ihnen zu rechnen.</p>
           </div>
         </div>
         <div class="owl-row">
           <img class="owl" src="assets/img/eule-hallo.jpg" alt="Herr Uhu, eine freundliche Eule mit Brille und Fliege" />
           <div class="bubble">
             <p class="bubble-name">Herr Uhu</p>
-            <p>Hallo! Ich bin Herr Uhu und begleite dich durch die Bruch-Werkstatt. In jeder Station erkläre ich dir etwas Neues, und du probierst es gleich aus. Später warten zwei Erklärvideos, die rätselhafte Geschichte von den siebzehn Kamelen – und zum Schluss ein Quiz.</p>
+            <p>Hallo! Ich bin Herr Uhu und begleite dich durch die Bruch-Werkstatt. In jeder Station erkläre ich dir etwas Neues, und du probierst es gleich aus. Später warten Erklärvideos, die rätselhafte Geschichte von den siebzehn Kamelen – und zum Schluss ein Quiz.</p>
+          </div>
+        </div>
+        <div class="mode" role="group" aria-labelledby="mode-title">
+          <p class="mode-title" id="mode-title">Einstellung: Wie weit seid ihr im Unterricht?</p>
+          <div class="mode-options">
+            <button class="mode-option" data-mode="mit" aria-pressed="true">
+              <span class="mode-name">Mit Bruchaddition</span>
+              <span class="mode-desc">Brüche addieren und subtrahieren gehört dazu.</span>
+            </button>
+            <button class="mode-option" data-mode="ohne" aria-pressed="false">
+              <span class="mode-name">Ohne Bruchaddition</span>
+              <span class="mode-desc">Für Klassen, die das noch nicht hatten. Aufgaben, Film und Quiz passen sich an.</span>
+            </button>
           </div>
         </div>
         <ol class="roadmap">
@@ -52,8 +66,9 @@
           <li><b>Brüche vergleichen:</b> Welcher Bruch ist größer?</li>
           <li><b>Dezimalzahlen:</b> Brüche mit Komma schreiben</li>
           <li><b>Dezimalzahlen vergleichen:</b> Stelle für Stelle</li>
-          <li><b>Plus und Minus:</b> Addieren und Subtrahieren – mit Erklärvideo</li>
+          <li><b>Plus und Minus:</b> <span class="only-mit">Brüche und Dezimalzahlen addieren und subtrahieren – mit Erklärvideo</span><span class="only-ohne">Dezimalzahlen addieren und subtrahieren</span></li>
           <li><b>Schriftlich dividieren:</b> Schritt für Schritt – mit Erklärvideo</li>
+          <li><b>Bruch gegen Dezimalzahl:</b> Was ist größer? – mit Erklärvideo</li>
           <li><b>Der Film:</b> „Die siebzehn Kamele“</li>
           <li><b>Das Quiz:</b> Werde Bruch-Profi!</li>
         </ol>
@@ -248,19 +263,19 @@
       <!-- ───────── Station 6 ───────── -->
       <section class="view" id="view-6" hidden>
         <p class="kicker">Station 6</p>
-        <h2>Addieren und Subtrahieren</h2>
+        <h2><span class="only-mit">Addieren und Subtrahieren</span><span class="only-ohne">Dezimalzahlen addieren und subtrahieren</span></h2>
         <div class="owl-row">
           <img class="owl owl-small" src="assets/img/eule-hallo.jpg" alt="" />
-          <div class="bubble"><p>Jetzt wird gerechnet! Schau dir zuerst mein Erklärvideo an. Es zeigt dir in weniger als einer Minute, wie man {1/2} und {1/3} addiert.</p></div>
+          <div class="bubble"><p class="only-mit">Jetzt wird gerechnet! Schau dir zuerst mein Erklärvideo an. Es zeigt dir in weniger als einer Minute, wie man {1/2} und {1/3} addiert.</p><p class="only-ohne">Jetzt wird gerechnet! Dezimalzahlen addierst und subtrahierst du genauso wie natürliche Zahlen. Wichtig ist nur eines: <b>Komma unter Komma</b>. Fehlende Stellen füllst du mit Nullen auf.</p></div>
         </div>
-        <div class="stage">
+        <div class="stage only-mit">
           <video id="erklaer" controls playsinline preload="metadata" poster="assets/img/poster-erklaervideo.jpg">
             <source src="assets/video/brueche-addieren.mp4" type="video/mp4" />
             Dein Browser kann das Video leider nicht abspielen. Lies die Regeln unten.
           </video>
         </div>
         <div class="rules">
-          <div class="rule">
+          <div class="rule only-mit">
             <p class="rule-title">Brüche</p>
             <p>1. Gleichnamig machen<br />2. Zähler addieren oder subtrahieren<br />3. Der Nenner bleibt gleich</p>
             <p class="rule-ex">{1/2} + {1/3} = {3/6} + {2/6} = {5/6}</p>
@@ -274,9 +289,11 @@
   3,25</pre>
           </div>
         </div>
-        <div class="note"><b>Achtung, häufiger Fehler:</b> Niemals die Nenner addieren! {1/2} + {1/3} ist <b>nicht</b> {2/5}.</div>
+        <div class="note only-mit"><b>Achtung, häufiger Fehler:</b> Niemals die Nenner addieren! {1/2} + {1/3} ist <b>nicht</b> {2/5}.</div>
+        <div class="note only-ohne"><b>Tipp:</b> Schreibe 2,5 als 2,50, bevor du 0,75 addierst. So stehen Zehntel unter Zehnteln und Hundertstel unter Hundertsteln.</div>
         <h3>Probier’s aus</h3>
-        <div class="tasks" id="tasks6"></div>
+        <div class="tasks only-mit" id="tasks6"></div>
+        <div class="tasks only-ohne" id="tasks6o"></div>
         <div class="actions"><button class="btn btn-primary" data-go="7" id="next6" disabled>Weiter zu Station 7</button></div>
       </section>
 
@@ -332,20 +349,78 @@
         <h3>Jetzt du allein</h3>
         <p class="hint">Nimm Papier und Stift und rechne schriftlich. Wähle dann dein Ergebnis.</p>
         <div class="tasks" id="tasks7b"></div>
-        <div class="actions"><button class="btn btn-primary" data-go="8" id="next7" disabled>Weiter zum Film</button></div>
+        <div class="actions"><button class="btn btn-primary" data-go="8" id="next7" disabled>Weiter zu Station 8</button></div>
       </section>
 
       <!-- ───────── Station 8 ───────── -->
       <section class="view" id="view-8" hidden>
-        <p class="kicker">Station 8 · Der Höhepunkt</p>
+        <p class="kicker">Station 8</p>
+        <h2>Bruch gegen Dezimalzahl</h2>
+        <div class="owl-row">
+          <img class="owl owl-small" src="assets/img/eule-hallo.jpg" alt="" />
+          <div class="bubble"><p>Was ist größer: {3/4} oder 0,7? So verschieden geschrieben kann man das schlecht sehen. Der Trick: Bring beide Zahlen in <b>dieselbe Schreibweise</b>. Am einfachsten wandelst du den Bruch in eine Dezimalzahl um – und vergleichst dann Stelle für Stelle.</p></div>
+        </div>
+        <div class="stage">
+          <video id="vglvideo" controls playsinline preload="metadata" poster="assets/img/poster-vergleichsvideo.jpg">
+            <source src="assets/video/bruch-oder-dezimalzahl.mp4" type="video/mp4" />
+            Dein Browser kann das Video leider nicht abspielen. Lies die Wege unten.
+          </video>
+        </div>
+        <div class="rules">
+          <div class="rule">
+            <p class="rule-title">Weg 1: Erweitern</p>
+            <p>Erweitere den Bruch auf den Nenner 10, 100 oder 1000.</p>
+            <p class="rule-ex">{3/4} = {75/100} = 0,75<br />0,75 &gt; 0,7</p>
+          </div>
+          <div class="rule">
+            <p class="rule-title">Weg 2: Dividieren</p>
+            <p>Rechne Zähler geteilt durch Nenner. Das geht bei jedem Bruch.</p>
+            <p class="rule-ex">{3/8} = 3 : 8 = 0,375<br />0,375 &lt; 0,4</p>
+          </div>
+          <div class="rule">
+            <p class="rule-title">Weg 3: Andersherum</p>
+            <p>Schreibe die Dezimalzahl als Bruch und mache gleichnamig.</p>
+            <p class="rule-ex">0,7 = {7/10} = {14/20}<br />{3/4} = {15/20} &gt; {14/20}</p>
+          </div>
+        </div>
+        <p class="pairs-title">Diese Paare lohnt es sich auswendig zu wissen:</p>
+        <div class="pairs">
+          <span>{1/2} = 0,5</span><span>{1/4} = 0,25</span><span>{3/4} = 0,75</span><span>{1/5} = 0,2</span>
+          <span>{1/10} = 0,1</span><span>{1/8} = 0,125</span><span>{1/3} ≈ 0,333</span><span>{2/3} ≈ 0,667</span>
+        </div>
+        <div class="numline numline-mix" aria-label="Zahlenstrahl von 0 bis 1: unten die Brüche ein Viertel, ein Halb und drei Viertel, oben die Dezimalzahlen 0,4 und 0,7">
+          <div class="numline-axis"></div>
+          <span style="left:0%">0</span><span style="left:25%">{1/4}</span><span style="left:50%">{1/2}</span><span style="left:75%">{3/4}</span><span style="left:100%">1</span>
+          <span class="up" style="left:40%">0,4</span><span class="up" style="left:70%">0,7</span>
+        </div>
+        <p class="hint">Brüche und Dezimalzahlen liegen auf demselben Zahlenstrahl. Hier siehst du: 0,7 liegt knapp links von {3/4}.</p>
+
+        <h3>Probier’s aus: Ordne von klein nach groß</h3>
+        <p class="hint">Tippe die Zahlen der Reihe nach an – die kleinste zuerst. Wandle die Brüche dazu im Kopf oder auf Papier um.</p>
+        <div class="sort" id="sort8"></div>
+        <p class="feedback" id="sort8-fb" role="status" aria-live="polite"></p>
+        <h3>Setze &lt;, &gt; oder = ein</h3>
+        <div class="tasks" id="tasks8"></div>
+        <div class="actions"><button class="btn btn-primary" data-go="9" id="next8" disabled>Weiter zum Film</button></div>
+      </section>
+
+      <!-- ───────── Station 9 ───────── -->
+      <section class="view" id="view-9" hidden>
+        <p class="kicker">Station 9 · Der Höhepunkt</p>
         <h2>Die siebzehn Kamele</h2>
         <div class="owl-row">
           <img class="owl owl-small" src="assets/img/eule-hallo.jpg" alt="" />
           <div class="bubble"><p>Vorhang auf für eine sehr alte Rätselgeschichte! Drei Geschwister sollen siebzehn Kamele teilen – und es geht einfach nicht auf. Achte genau auf die Brüche!</p></div>
         </div>
-        <div class="stage">
+        <div class="stage only-mit">
           <video id="film" controls playsinline preload="metadata" poster="assets/img/kamele1.jpg">
             <source src="assets/video/die-siebzehn-kamele.mp4" type="video/mp4" />
+            Dein Browser kann den Film leider nicht abspielen. Lies die Geschichte unten nach.
+          </video>
+        </div>
+        <div class="stage only-ohne">
+          <video id="film-ohne" controls playsinline preload="metadata" poster="assets/img/kamele1.jpg">
+            <source src="assets/video/die-siebzehn-kamele-ohne-addition.mp4" type="video/mp4" />
             Dein Browser kann den Film leider nicht abspielen. Lies die Geschichte unten nach.
           </video>
         </div>
@@ -361,18 +436,19 @@
           </div>
         </details>
         <h3>Denk nach: Warum blieb ein Kamel übrig?</h3>
-        <div class="choices" id="check8">
+        <div class="choices" id="check9">
           <button class="choice" data-ok="0" data-why="Gezaubert wurde nicht – die Lösung steckt in den Brüchen des Testaments.">Weil die weise Frau zaubern konnte.</button>
-          <button class="choice" data-ok="1" data-why="Genau! Gleichnamig gemacht: {9/18} + {6/18} + {2/18} = {17/18}. Ein Achtzehntel war im Testament gar nicht verteilt – das ist bei 18 Kamelen genau ein Kamel.">Weil {1/2} + {1/3} + {1/9} zusammen nur {17/18} ergeben.</button>
+          <button class="choice only-mit" data-ok="1" data-why="Genau! Gleichnamig gemacht: {9/18} + {6/18} + {2/18} = {17/18}. Ein Achtzehntel war im Testament gar nicht verteilt – das ist bei 18 Kamelen genau ein Kamel.">Weil {1/2} + {1/3} + {1/9} zusammen nur {17/18} ergeben.</button>
+          <button class="choice only-ohne" data-ok="1" data-why="Genau! {1/2} von 18 sind 9, {1/3} von 18 sind 6 und {1/9} von 18 sind 2 Kamele. Das sind zusammen nur 17 von 18, also {17/18}. Ein Kamel war im Testament gar nicht verteilt.">Weil die drei Anteile zusammen nur 17 von 18 Kamelen ergeben.</button>
           <button class="choice" data-ok="0" data-why="Gezählt haben sie richtig: 9 + 6 + 2 = 17.">Weil sich die Geschwister verzählt haben.</button>
         </div>
-        <p class="feedback" id="check8-fb" role="status" aria-live="polite"></p>
-        <div class="actions"><button class="btn btn-primary" data-go="9" id="next8" disabled>Weiter zum Quiz</button></div>
+        <p class="feedback" id="check9-fb" role="status" aria-live="polite"></p>
+        <div class="actions"><button class="btn btn-primary" data-go="10" id="next9" disabled>Weiter zum Quiz</button></div>
       </section>
 
-      <!-- ───────── Station 9 ───────── -->
-      <section class="view" id="view-9" hidden>
-        <p class="kicker">Station 9</p>
+      <!-- ───────── Station 10 ───────── -->
+      <section class="view" id="view-10" hidden>
+        <p class="kicker">Station 10</p>
         <h2>Das Abschlussquiz</h2>
         <div id="quiz"></div>
       </section>
@@ -383,6 +459,6 @@
       <button class="link" id="reset">Fortschritt zurücksetzen</button>
     </footer>
 
-    <script src="js/app.js?v=1.1.0"></script>
+    <script src="js/app.js?v=1.2.0"></script>
   </body>
 </html>

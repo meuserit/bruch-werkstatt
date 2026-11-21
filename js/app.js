@@ -2,9 +2,10 @@
 (function () {
   "use strict";
 
-  var VERSION = "1.1.0";
+  var VERSION = "1.2.0";
   var STORE_KEY = "bruchwerkstatt.v1";
-  var LAST = 9; // Nummer der letzten Station (Quiz)
+  var LAST = 10; // Nummer der letzten Station (Quiz)
+  var QUIZ_SIZE = 12; // so viele Fragen werden pro Quiz-Runde zufällig ausgewählt
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
@@ -36,17 +37,34 @@
   }
 
   /* ---------- Fortschritt (bleibt im Browser gespeichert) ---------- */
-  var state = { done: {}, best: null };
+  // mode: "mit" = mit Bruchaddition, "ohne" = ohne Bruchaddition
+  var state = { done: {}, best: null, mode: "mit" };
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
     if (saved && typeof saved === "object") {
       state.done = saved.done || {};
       state.best = typeof saved.best === "number" ? saved.best : null;
+      if (saved.mode === "ohne") state.mode = "ohne";
     }
   } catch (e) { /* ohne Speicher läuft die App trotzdem */ }
 
   function save() {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* egal */ }
+  }
+
+  /* ---------- Modus: mit oder ohne Bruchaddition ---------- */
+  // Elemente mit der Klasse "only-mit" bzw. "only-ohne" sind nur im passenden Modus sichtbar (siehe mathe.css).
+  // Der Modus lässt sich auch über den Link voreinstellen:  …/index.html?modus=ohne
+  function setMode(mode) {
+    state.mode = mode === "ohne" ? "ohne" : "mit";
+    document.body.classList.toggle("mode-ohne", state.mode === "ohne");
+    document.body.classList.toggle("mode-mit", state.mode === "mit");
+    $$(".mode-option").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.dataset.mode === state.mode ? "true" : "false");
+    });
+    $$("video").forEach(function (v) { v.pause(); });
+    quiz = null; // ein laufendes Quiz beginnt mit den passenden Fragen neu
+    save();
   }
 
   function shuffle(list) {
@@ -86,7 +104,7 @@
   }
 
   // Manche Stationen haben mehrere Übungen: erst wenn alle Teile gelöst sind, gilt die Station als erledigt.
-  var PARTS = { 4: 2, 5: 2, 7: 2 };
+  var PARTS = { 4: 2, 5: 2, 7: 2, 8: 2 };
   var partsDone = {};
 
   function markDone(n) {
@@ -258,14 +276,11 @@
     { q: "4,8 : 4 = ?", a: ["1,2", "12", "0,12", "1,02"], why: "4 : 4 = 1. Jetzt überschreitest du das Komma: Komma ins Ergebnis. 8 : 4 = 2.", hint: "Sobald du über das Komma gehst, setzt du auch im Ergebnis das Komma." }
   ], 7);
 
-  /* ---------- Station 5: Dezimalzahlen der Größe nach ordnen ---------- */
-  (function setupSort() {
-    var ROUNDS = [
-      ["0,07", "0,605", "0,65", "0,7"],
-      ["1,02", "1,121", "1,19", "1,2"]
-    ];
-    var box = $("#sort");
-    var fb = $("#sort-fb");
+  /* ---------- Zahlen der Größe nach ordnen (Stationen 5 und 8) ---------- */
+  // ROUNDS: je Runde die Zahlen in der richtigen Reihenfolge (kleinste zuerst)
+  function sortGame(id, ROUNDS, station, doneText, hintText) {
+    var box = $("#" + id);
+    var fb = $("#" + id + "-fb");
     var round = 0;
     var next = 0;
 
@@ -301,8 +316,8 @@
         if (next === order.length) {
           fb.className = "feedback is-right";
           if (round === ROUNDS.length - 1) {
-            fb.textContent = "✔ Perfekt geordnet! Du lässt dich von langen Zahlen nicht täuschen.";
-            markDone(5);
+            fb.textContent = doneText;
+            markDone(station);
           } else {
             fb.textContent = "✔ Richtig geordnet! Gleich kommt die zweite Runde.";
             setTimeout(function () { round++; fb.textContent = ""; render(); }, 1600);
@@ -311,13 +326,42 @@
       } else {
         b.classList.add("shake");
         setTimeout(function () { b.classList.remove("shake"); }, 450);
-        fb.textContent = "✘ Es gibt noch eine kleinere Zahl. Vergleiche Stelle für Stelle – hänge in Gedanken Nullen an.";
+        fb.textContent = hintText;
         fb.className = "feedback is-wrong";
       }
     });
 
     render();
-  })();
+  }
+
+  sortGame("sort", [
+    ["0,07", "0,605", "0,65", "0,7"],
+    ["1,02", "1,121", "1,19", "1,2"]
+  ], 5, "✔ Perfekt geordnet! Du lässt dich von langen Zahlen nicht täuschen.",
+  "✘ Es gibt noch eine kleinere Zahl. Vergleiche Stelle für Stelle – hänge in Gedanken Nullen an.");
+
+  sortGame("sort8", [
+    ["0,2", "{1/4}", "0,3", "{1/2}"],
+    ["{3/5}", "0,65", "{3/4}", "0,8"]
+  ], 8, "✔ Perfekt geordnet! Brüche und Dezimalzahlen bringst du sicher in eine Reihe.",
+  "✘ Es gibt noch eine kleinere Zahl. Wandle die Brüche in Dezimalzahlen um: zum Beispiel {1/4} = 0,25 und {3/5} = 0,6.".replace(/\{(\d+)\/(\d+)\}/g, "$1/$2"));
+
+  /* ---------- Station 8: Bruch gegen Dezimalzahl ---------- */
+  taskSet("tasks8", [
+    { q: "{3/4} ▢ 0,7", inline: true, a: [">", "<", "="], why: "{3/4} = 0,75 – und 0,75 ist größer als 0,70.", hint: "Wandle {3/4} in eine Dezimalzahl um: Erweitere auf Hundertstel." },
+    { q: "0,5 ▢ {1/2}", inline: true, a: ["=", "<", ">"], why: "{1/2} = {5/10} = 0,5. Beide Zahlen sind gleich groß.", hint: "Erweitere {1/2} auf Zehntel." },
+    { q: "{2/5} ▢ 0,45", inline: true, a: ["<", ">", "="], why: "{2/5} = {4/10} = 0,40 – und das ist kleiner als 0,45.", hint: "Erweitere {2/5} auf Zehntel und hänge eine Null an." },
+    { q: "{3/8} ▢ 0,4", inline: true, a: ["<", ">", "="], why: "3 : 8 = 0,375. Länger ist nicht größer: 0,375 < 0,400.", hint: "Rechne 3 : 8 schriftlich. Vergleiche dann die Zehntel." },
+    { q: "0,3 ▢ {1/3}", inline: true, a: ["<", ">", "="], why: "1 : 3 = 0,333… Das ist ein kleines bisschen mehr als 0,3.", hint: "Rechne 1 : 3 schriftlich. Die Division hört nie auf: 0,333…" }
+  ], 8);
+
+  /* ---------- Station 6 im Modus „ohne Bruchaddition“: nur Dezimalzahlen ---------- */
+  taskSet("tasks6o", [
+    { q: "2,5 + 0,75 = ?", a: ["3,25", "1,00", "2,80", "3,20"], why: "Komma unter Komma: 2,50 + 0,75 = 3,25.", hint: "Schreibe 2,5 als 2,50 und rechne stellengerecht: Komma unter Komma." },
+    { q: "0,6 + 0,45 = ?", a: ["1,05", "0,51", "0,105", "1,5"], why: "0,60 + 0,45 = 1,05. Die Zehntel ergeben zusammen mehr als ein Ganzes.", hint: "Schreibe 0,6 als 0,60. Achte auf den Übertrag zu den Einern." },
+    { q: "3,2 − 1,45 = ?", a: ["1,75", "2,25", "1,85", "1,65"], why: "Komma unter Komma: 3,20 − 1,45 = 1,75.", hint: "Schreibe 3,2 als 3,20. Dann kannst du Stelle für Stelle subtrahieren." },
+    { q: "5 − 0,8 = ?", a: ["4,2", "4,8", "5,8", "0,42"], why: "5 = 5,0 – und 5,0 − 0,8 = 4,2.", hint: "Schreibe 5 als 5,0. Dann steht Komma unter Komma." }
+  ], 6);
 
   taskSet("tasks6", [
     { q: "{1/5} + {2/5} = ?", a: ["{3/5}", "{3/10}", "{2/25}", "{1/5}"], why: "Gleicher Nenner: Zähler addieren, 1 + 2 = 3. Der Nenner bleibt 5.", hint: "Die Nenner sind schon gleich. Addiere nur die Zähler." },
@@ -329,8 +373,8 @@
 
   /* ---------- Auswahlfrage zum Film (Station 8) ---------- */
   (function setupCheck() {
-    var box = $("#check8");
-    var fb = $("#check8-fb");
+    var box = $("#check9");
+    var fb = $("#check9-fb");
     $$(".choice", box).forEach(function (btn) {
       var why = btn.dataset.why;
       btn.addEventListener("click", function () {
@@ -340,7 +384,7 @@
         fb.className = "feedback " + (ok ? "is-right" : "is-wrong");
         if (ok) {
           $$(".choice", box).forEach(function (b) { b.disabled = true; });
-          markDone(8);
+          markDone(9);
         } else {
           btn.disabled = true;
         }
@@ -414,22 +458,29 @@
     });
   })();
 
-  /* ---------- Station 7: Quiz mit Herrn Uhu ---------- */
+  /* ---------- Station 10: Quiz mit Herrn Uhu ---------- */
+  // only: "mit" / "ohne" = Frage erscheint nur in diesem Modus
   var QUESTIONS = [
     { q: "Wie heißt die Zahl unter dem Bruchstrich?", a: ["Nenner", "Zähler", "Quotient", "Summe"], why: "Der Nenner steht unten. Er sagt, in wie viele gleiche Teile das Ganze geteilt ist." },
     { q: "Wie lautet {4/6} vollständig gekürzt?", a: ["{2/3}", "{1/2}", "{4/3}", "{2/6}"], why: "Zähler und Nenner durch 2 teilen: 4 : 2 = 2 und 6 : 2 = 3." },
     { q: "Welcher Bruch ist am größten?", a: ["{3/4}", "{1/2}", "{2/3}", "{3/5}"], why: "Als Dezimalzahlen: 0,75 ist größer als 0,5, 0,666… und 0,6." },
     { q: "Wie schreibt man {3/4} als Dezimalzahl?", a: ["0,75", "0,34", "3,4", "0,43"], why: "{3/4} = {75/100} = 0,75." },
     { q: "Welche Zahl ist größer: 0,6 oder 0,58?", a: ["0,6", "0,58", "Beide sind gleich groß.", "Das kann man nicht sagen."], why: "0,6 = 0,60, und das ist mehr als 0,58." },
-    { q: "{1/2} + {1/3} = ?", a: ["{5/6}", "{2/5}", "{1/5}", "{2/6}"], why: "Gleichnamig machen: {3/6} + {2/6} = {5/6}." },
-    { q: "{5/8} − {1/4} = ?", a: ["{3/8}", "{4/4}", "{4/8}", "{6/12}"], why: "{1/4} = {2/8}, also {5/8} − {2/8} = {3/8}." },
+    { only: "mit", q: "{1/2} + {1/3} = ?", a: ["{5/6}", "{2/5}", "{1/5}", "{2/6}"], why: "Gleichnamig machen: {3/6} + {2/6} = {5/6}." },
+    { only: "mit", q: "{5/8} − {1/4} = ?", a: ["{3/8}", "{4/4}", "{4/8}", "{6/12}"], why: "{1/4} = {2/8}, also {5/8} − {2/8} = {3/8}." },
+    { q: "Was ist größer: {3/4} oder 0,7?", a: ["{3/4}", "0,7", "Beide sind gleich groß."], why: "{3/4} = 0,75 – und 0,75 ist größer als 0,70." },
+    { q: "Welches Zeichen passt? {2/5} ▢ 0,45", a: ["<", ">", "="], why: "{2/5} = {4/10} = 0,40. Das ist kleiner als 0,45." },
+    { q: "Welche Zahl ist am kleinsten?", a: ["0,2", "{1/4}", "0,3", "{1/2}"], why: "Als Dezimalzahlen: 0,2 – 0,25 – 0,3 – 0,5. Die kleinste ist 0,2." },
+    { q: "Welche Dezimalzahl ist genauso groß wie {3/8}? Rechne 3 : 8.", a: ["0,375", "0,38", "3,8", "0,83"], why: "3 : 8 = 0,375. Der Bruchstrich bedeutet „geteilt durch“." },
+    { q: "Du willst {3/5} mit 0,65 vergleichen. Was tust du zuerst?", a: ["{3/5} in eine Dezimalzahl umwandeln", "Zähler und Nenner vertauschen", "Das Komma bei 0,65 weglassen", "Beide Zahlen runden"], why: "{3/5} = {6/10} = 0,6. Jetzt siehst du: 0,6 < 0,65." },
     { q: "1,5 + 0,25 = ?", a: ["1,75", "1,30", "0,40", "4,0"], why: "Komma unter Komma: 1,50 + 0,25 = 1,75." },
     { q: "Runde 2,347 auf Zehntel.", a: ["2,3", "2,4", "2,35", "2,0"], why: "Die Hundertstel-Stelle ist 4, also wird abgerundet: 2,3." },
     { q: "Welche Zahl ist am größten?", a: ["0,7", "0,65", "0,605", "0,07"], why: "Zehntel vergleichen: 7 Zehntel sind mehr als 6 oder 0 Zehntel. Länger ist nicht größer!" },
     { q: "Welches Zeichen passt? 2,05 ▢ 2,5", a: ["<", ">", "="], why: "Vor dem Komma gleich. Zehntel: 0 ist kleiner als 5, also 2,05 < 2,50." },
     { q: "Rechne schriftlich: 9 : 4 = ?", a: ["2,25", "2,5", "2,1", "2,4"], why: "9 : 4 = 2 Rest 1. Komma, 0 herunter: 10 : 4 = 2 Rest 2. Wieder 0: 20 : 4 = 5." },
     { q: "Beim schriftlichen Dividieren bleibt ein Rest, aber alle Ziffern sind verbraucht. Was tust du?", a: ["Komma ins Ergebnis setzen und eine 0 herunterholen", "Den Rest einfach weglassen", "Den Rest ans Ergebnis anhängen", "Von vorn anfangen"], why: "So rechnest du hinter dem Komma weiter, bis der Rest 0 ist." },
-    { q: "Warum blieb bei den siebzehn Kamelen eines übrig?", a: ["Weil {1/2} + {1/3} + {1/9} nur {17/18} ergeben.", "Weil die weise Frau zaubern konnte.", "Weil ein Kamel weggelaufen ist.", "Weil sich alle verzählt haben."], why: "Im Testament war ein Achtzehntel gar nicht verteilt – bei 18 Kamelen genau ein Kamel." }
+    { only: "mit", q: "Warum blieb bei den siebzehn Kamelen eines übrig?", a: ["Weil {1/2} + {1/3} + {1/9} nur {17/18} ergeben.", "Weil die weise Frau zaubern konnte.", "Weil ein Kamel weggelaufen ist.", "Weil sich alle verzählt haben."], why: "Im Testament war ein Achtzehntel gar nicht verteilt – bei 18 Kamelen genau ein Kamel." },
+    { only: "ohne", q: "Warum blieb bei den siebzehn Kamelen eines übrig?", a: ["Weil die drei Anteile zusammen nur 17 von 18 Kamelen ergeben.", "Weil die weise Frau zaubern konnte.", "Weil ein Kamel weggelaufen ist.", "Weil sich alle verzählt haben."], why: "{1/2} von 18 sind 9, {1/3} von 18 sind 6, {1/9} von 18 sind 2 – zusammen nur 17. Ein Kamel war im Testament gar nicht verteilt." }
   ];
 
   var PRAISE = ["Bravo! Genau richtig!", "Stark gerechnet!", "Hervorragend – weiter so!", "Volltreffer! Ich bin stolz auf dich.", "Klasse gemacht!", "Wunderbar! Das sitzt."];
@@ -440,9 +491,12 @@
   function startQuiz(force) {
     if (quiz && !force && !quiz.finished) return;
     quiz = {
-      items: shuffle(QUESTIONS).map(function (q) {
-        return { q: q.q, why: q.why, right: q.a[0], answers: shuffle(q.a) };
-      }),
+      // nur Fragen, die zum Modus passen; daraus eine zufällige Auswahl
+      items: shuffle(QUESTIONS.filter(function (q) { return !q.only || q.only === state.mode; }))
+        .slice(0, QUIZ_SIZE)
+        .map(function (q) {
+          return { q: q.q, why: q.why, right: q.a[0], answers: shuffle(q.a) };
+        }),
       pos: 0, score: 0, streak: 0, finished: false
     };
     renderIntro();
@@ -464,8 +518,8 @@
   function renderIntro() {
     var box = $("#quiz");
     box.textContent = "";
-    var lines = ["Jetzt bist du dran! Ich habe " + QUESTIONS.length + " Fragen für dich. Lass dir ruhig Zeit – es gibt keine Uhr. Papier und Stift für Nebenrechnungen sind erlaubt.", "Nach jeder Antwort erkläre ich dir kurz den Rechenweg. Du schaffst das!"];
-    if (state.best != null) lines.push("Dein bisher bestes Ergebnis: " + state.best + " von " + QUESTIONS.length + " Punkten.");
+    var lines = ["Jetzt bist du dran! Ich habe " + QUIZ_SIZE + " Fragen für dich. Lass dir ruhig Zeit – es gibt keine Uhr. Papier und Stift für Nebenrechnungen sind erlaubt.", "Nach jeder Antwort erkläre ich dir kurz den Rechenweg. Du schaffst das!"];
+    if (state.best != null) lines.push("Dein bisher bestes Ergebnis: " + state.best + " von " + QUIZ_SIZE + " Punkten.");
     box.appendChild(owlRow("eule-hallo", "Herr Uhu", lines));
     var actions = el("div", "actions");
     var go = el("button", "btn btn-primary btn-big", "Quiz starten");
@@ -640,6 +694,12 @@
 
   /* ---------- Start ---------- */
   fracifyNode($("main"));
+
+  var wanted = /[?&]modus=(mit|ohne)\b/.exec(location.search);
+  setMode(wanted ? wanted[1] : state.mode);
+  $$(".mode-option").forEach(function (b) {
+    b.addEventListener("click", function () { setMode(b.dataset.mode); });
+  });
   $("#version").textContent = "v" + VERSION;
 
   $("#reset").addEventListener("click", function () {

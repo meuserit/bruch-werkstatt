@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node build.mjs",
     "dev": "npx --yes hyperframes@0.9.54 preview",
-    "render": "node build.mjs && npx --yes hyperframes@0.9.54 render -o out/video.mp4 -q high"
+    "render": "node build.mjs && npx --yes hyperframes@0.9.54 render -o out/video.mp4 -q high",
+    "render:ohne": "node build.mjs ohne && npx --yes hyperframes@0.9.54 render -o out/video-ohne.mp4 -q high && node build.mjs"
   }
 }

@@ -124,3 +124,30 @@ pre.rule-ex.column { font-family: ui-monospace, "Cascadia Mono", Consolas, monos
 
 .fourstep b { font-size: 1rem; }
 .fourstep p { padding: 0.6rem 0.7rem; }
+
+/* ───── Modus: mit oder ohne Bruchaddition ───── */
+body.mode-mit .only-ohne, body.mode-ohne .only-mit { display: none !important; }
+.mode { margin: 1.5rem 0 0; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem 1.1rem; box-shadow: var(--shadow); }
+.mode-title { font-family: var(--serif); font-weight: 800; font-size: 1.15rem; margin-bottom: 0.7rem; }
+.mode-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.mode-option { position: relative; display: grid; gap: 0.2rem; text-align: left; background: var(--paper); border: 2px solid var(--line); border-radius: 16px; padding: 0.75rem 0.9rem 0.8rem 2.9rem; }
+.mode-option::before { content: ""; position: absolute; left: 0.9rem; top: 0.85rem; width: 1.3rem; height: 1.3rem; border-radius: 50%; border: 2px solid #b9a47c; background: var(--card); }
+.mode-option[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); }
+.mode-option[aria-pressed="true"]::before { border-color: var(--green); background: radial-gradient(circle, var(--green) 0 45%, var(--card) 50%); }
+.mode-name { font-weight: 900; }
+.mode-desc { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.35; }
+
+/* ───── Station 8: Bruch gegen Dezimalzahl ───── */
+.pairs-title { margin: 1.5rem 0 0.6rem; font-weight: 800; }
+.pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
+.pairs span { display: flex; align-items: center; justify-content: center; gap: 0.2rem; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 0.45rem 0.6rem; font-family: var(--serif); font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
+.numline-mix { height: 7.4rem; margin-top: 2rem; }
+.numline-mix .numline-axis { top: 3rem; }
+.numline-mix > span { top: 2.1rem; }
+.numline-mix > span.up { top: 0; padding-top: 0; color: var(--green); font-family: var(--sans); font-size: 1.1rem; }
+.numline-mix > span.up::before { top: 1.75rem; height: 1.6rem; background: var(--green); }
+.sort-chip .frac, .sort-done .frac { font-size: 0.8em; }
+
+@media (max-width: 600px) {
+  .mode-options { grid-template-columns: 1fr; }
+}

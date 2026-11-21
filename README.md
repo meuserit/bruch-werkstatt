@@ -1,8 +1,23 @@
 # Bruch-Werkstatt
 
-Interaktive Lern-WebApp für die **6. Klasse** (Mathematik, NRW, 1. Halbjahr) zum Thema **Brüche und Dezimalzahlen** – Version **1.1.0**
+Interaktive Lern-WebApp für die **6. Klasse** (Mathematik, NRW, 1. Halbjahr) zum Thema **Brüche und Dezimalzahlen** – Version **1.2.0**
 
-Die App führt in neun kurzen Stationen durch das Thema. Lehrer-Eule **Herr Uhu** erklärt, lobt und ermutigt.
+Die App führt in zehn kurzen Stationen durch das Thema. Lehrer-Eule **Herr Uhu** erklärt, lobt und ermutigt.
+
+## Mit oder ohne Bruchaddition
+
+Auf der Startseite wählt man, wie weit die Klasse ist:
+
+- **Mit Bruchaddition** (Voreinstellung): Brüche addieren und subtrahieren gehört dazu.
+- **Ohne Bruchaddition**: Station 6 übt nur Dezimalzahlen, das Erklärvideo „Brüche addieren“ entfällt, der Film endet mit einer Auflösung ohne Bruchaddition, und im Quiz kommen keine Aufgaben zur Bruchaddition vor.
+
+Die Wahl wird im Browser gespeichert. Sie lässt sich auch über den Link voreinstellen – praktisch zum Verteilen an die Klasse:
+
+```
+…/index.html?modus=ohne      oder      …/index.html?modus=mit
+```
+
+## Stationen
 
 | Station | Inhalt | Übung |
 |---|---|---|
@@ -11,12 +26,15 @@ Die App führt in neun kurzen Stationen durch das Thema. Lehrer-Eule **Herr Uhu*
 | 3 · Brüche vergleichen | Gleichnamig machen, Zahlenstrahl | <, > oder = einsetzen |
 | 4 · Dezimalzahlen | Stellenwerttafel, Bruch ↔ Dezimalzahl, Runden | Brüche und Dezimalzahlen zuordnen, 2 Aufgaben |
 | 5 · Dezimalzahlen vergleichen | Stelle für Stelle, typische Fallen (0,5 > 0,45; 0,3 = 0,30) | Zahlen der Größe nach ordnen, <, > oder = einsetzen |
-| 6 · Plus und Minus | Addieren und Subtrahieren von Brüchen und Dezimalzahlen | **Erklärvideo** „Brüche addieren“ (49 s), 5 Aufgaben |
+| 6 · Plus und Minus | *mit:* Brüche und Dezimalzahlen addieren und subtrahieren, **Erklärvideo** „Brüche addieren“ (49 s) · *ohne:* nur Dezimalzahlen | *mit:* 5 Aufgaben · *ohne:* 4 Aufgaben |
 | 7 · Schriftlich dividieren | Teilen – Malnehmen – Abziehen – Herunterholen, Komma im Ergebnis, Bruch als Division | **Erklärvideo** „13 : 4 = 3,25“ (56 s), geführte Rechnung 87 : 4, 4 Aufgaben |
-| 8 · Der Film | **„Die siebzehn Kamele“** – eine alte Rätselgeschichte (102 s) | Warum bleibt ein Kamel übrig? |
-| 9 · Das Quiz | 14 Fragen in zufälliger Reihenfolge | Rückmeldung von Herrn Uhu, Ergebnis mit Sternen, zum Abschluss das Lied „Bruchstark“ mit Text zum Mitsingen |
+| 8 · Bruch gegen Dezimalzahl | Bruch und Dezimalzahl vergleichen: erweitern, dividieren oder Dezimalzahl als Bruch schreiben | **Erklärvideo** „Bruch oder Dezimalzahl?“ (62 s), gemischte Zahlen ordnen, <, > oder = einsetzen |
+| 9 · Der Film | **„Die siebzehn Kamele“** – eine alte Rätselgeschichte, in zwei Fassungen (mit/ohne Bruchaddition) | Warum bleibt ein Kamel übrig? |
+| 10 · Das Quiz | 12 zufällig ausgewählte Fragen, passend zum Modus | Rückmeldung von Herrn Uhu, Ergebnis mit Sternen, zum Abschluss das Lied „Bruchstark“ |
 
 Multiplizieren und Dividieren von Brüchen (meist 2. Halbjahr) sind bewusst nicht enthalten; dividiert wird durch natürliche Zahlen.
+
+Hinweis: Das Lied „Bruchstark“ erwähnt in der zweiten Strophe das Addieren von Brüchen; es wird in beiden Modi gespielt.
 
 ## Starten
 
@@ -41,23 +59,26 @@ assets/fonts          Schriften Fraunces und Nunito
 film/                 Quelle des Films (Hyperframes-Komposition)
 erklaervideo/         Quelle des Erklärvideos „Brüche addieren“ (Hyperframes)
 divisionsvideo/       Quelle des Erklärvideos „Schriftlich dividieren“ (Hyperframes)
+vergleichsvideo/      Quelle des Erklärvideos „Bruch oder Dezimalzahl?“ (Hyperframes)
 ```
 
 Brüche schreibt man in den Texten als `{3/4}`; die App macht daraus einen echten Bruch mit Bruchstrich.
 
 ## Die Videos ändern (Hyperframes)
 
-Alle drei Videos sind [Hyperframes](https://hyperframes.heygen.com)-Kompositionen: HTML + GSAP, gerendert zu MP4.
+Alle Videos sind [Hyperframes](https://hyperframes.heygen.com)-Kompositionen: HTML + GSAP, gerendert zu MP4.
 Texte und Zeiten stehen jeweils in `build.mjs`; daraus entsteht `index.html`.
 
 ```bash
-cd film            # oder: cd erklaervideo / cd divisionsvideo
+cd film            # oder: cd erklaervideo / divisionsvideo / vergleichsvideo
 npm run dev        # Vorschau im Browser
 npm run render     # erzeugt out/video.mp4 (1920×1080)
 # fürs Web verkleinern:
 ffmpeg -i out/video.mp4 -vf scale=1280:720 -c:v libx264 -preset slow -crf 24 -pix_fmt yuv420p \
   -c:a aac -b:a 128k -movflags +faststart ../assets/video/die-siebzehn-kamele.mp4
 ```
+
+Der Film hat zwei Fassungen: `node build.mjs` erzeugt den Schluss mit Bruchaddition, `node build.mjs ohne` den Schluss ohne Bruchaddition (danach jeweils rendern).
 
 Voraussetzungen: Node.js 22+, FFmpeg, Chrome.
 
@@ -67,10 +88,11 @@ Voraussetzungen: Node.js 22+, FFmpeg, Chrome.
 - Illustrationen und Sprecherstimme: KI-generiert mit Higgsfield (Bilder: GPT Image, Stimme: ElevenLabs).
 - Lied „Bruchstark“: Text eigens für die App geschrieben, Musik und Gesang KI-generiert mit Suno.
 - Schriften: Fraunces und Nunito (SIL Open Font License 1.1).
-- Animation: GSAP (jeweils im Ordner `vendor` der drei Video-Projekte, Standard-Lizenz von GSAP).
+- Animation: GSAP (jeweils im Ordner `vendor` der Video-Projekte, Standard-Lizenz von GSAP).
 
 ## Versionen
 
+- **1.2.0** – Einstellung „mit / ohne Bruchaddition“ (auch per Link `?modus=ohne`), neue Station „Bruch gegen Dezimalzahl“ mit Erklärvideo, Film-Fassung ohne Bruchaddition, Quiz mit 12 zufällig ausgewählten Fragen passend zum Modus.
 - **1.1.0** – Lied „Bruchstark“ als Abschluss nach dem Quiz, mit Text zum Mitsingen.
 
 - **1.0.0** – Erste Fassung: neun Stationen, Erklärvideos „Brüche addieren“ und „Schriftlich dividieren“, Film „Die siebzehn Kamele“, Abschlussquiz mit Herrn Uhu.

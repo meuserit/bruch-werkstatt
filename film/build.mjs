@@ -73,7 +73,13 @@ const scenes = [
     badges: [[2.4, "9 + 6 + 2 = 17", "left:60px;top:60px"]],
   },
 ];
-const moral = { audio: 11.96, hold: 4.0 };
+// Zwei Fassungen des Schlusses:
+//   node build.mjs        → Auflösung über die Bruchaddition (1/2 + 1/3 + 1/9 = 17/18)
+//   node build.mjs ohne   → Auflösung ohne Bruchaddition (Anteile von 18 Kamelen)
+const OHNE = process.argv[2] === "ohne";
+const moral = OHNE
+  ? { audio: 15.49, hold: 4.0, file: "szene8-ohne.mp3", at: [4.8, 10.6, 12.2] }
+  : { audio: 11.96, hold: 4.0, file: "szene8.mp3", at: [4.5, 7.6, 9.6] };
 
 const r = (n) => Math.round(n * 100) / 100;
 let t = 0;
@@ -131,13 +137,17 @@ for (const s of scenes) {
 
 // Auflösung
 const mv = moralStart + FADE;
-html.push(`<div id="moral" class="clip moral" data-start="${r(moralStart)}" data-duration="${r(total - moralStart)}" data-track-index="4"><div class="moral-card"><div id="m-kicker" class="moral-kicker">Das Geheimnis</div><div class="moral-eq"><span id="m-1">${F(1, 2)} + ${F(1, 3)} + ${F(1, 9)}</span><span id="m-2"> = ${F(9, 18)} + ${F(6, 18)} + ${F(2, 18)}</span><span id="m-3" class="moral-strong"> = ${F(17, 18)}</span></div><div id="m-4" class="moral-note">Ein Achtzehntel fehlt zum Ganzen – genau das geliehene Kamel!</div></div></div>`);
-html.push(`<audio id="a8" src="assets/szene8.mp3" data-start="${r(mv)}" data-duration="${moral.audio}" data-track-index="5" data-volume="1"></audio>`);
+html.push(`<div id="moral" class="clip moral" data-start="${r(moralStart)}" data-duration="${r(total - moralStart)}" data-track-index="4"><div class="moral-card"><div id="m-kicker" class="moral-kicker">Das Geheimnis</div>${
+  OHNE
+    ? `<div id="m-1" class="moral-parts">${F(1, 2)} von 18 = 9 &nbsp;·&nbsp; ${F(1, 3)} von 18 = 6 &nbsp;·&nbsp; ${F(1, 9)} von 18 = 2</div><div class="moral-eq moral-sum"><span id="m-2">9 + 6 + 2 =&nbsp;</span><span id="m-3" class="moral-strong">17 von 18 Kamelen</span></div><div id="m-4" class="moral-note">Ein Kamel war im Testament gar nicht verteilt – genau das geliehene!</div>`
+    : `<div class="moral-eq"><span id="m-1">${F(1, 2)} + ${F(1, 3)} + ${F(1, 9)}</span><span id="m-2"> = ${F(9, 18)} + ${F(6, 18)} + ${F(2, 18)}</span><span id="m-3" class="moral-strong"> = ${F(17, 18)}</span></div><div id="m-4" class="moral-note">Ein Achtzehntel fehlt zum Ganzen – genau das geliehene Kamel!</div>`
+}</div></div>`);
+html.push(`<audio id="a8" src="assets/${moral.file}" data-start="${r(mv)}" data-duration="${moral.audio}" data-track-index="5" data-volume="1"></audio>`);
 anim.push(`tl.fromTo("#moral", { opacity: 0 }, { opacity: 1, duration: ${FADE}, ease: "power1.inOut" }, ${r(moralStart)});`);
 anim.push(`tl.fromTo("#m-kicker", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, ${r(mv + 0.2)});`);
-anim.push(`tl.fromTo("#m-1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, ${r(mv + 4.5)});`);
-anim.push(`tl.fromTo("#m-2", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power3.out" }, ${r(mv + 7.6)});`);
-anim.push(`tl.fromTo("#m-3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.6)" }, ${r(mv + 9.6)});`);
+anim.push(`tl.fromTo("#m-1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, ${r(mv + moral.at[0])});`);
+anim.push(`tl.fromTo("#m-2", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power3.out" }, ${r(mv + moral.at[1])});`);
+anim.push(`tl.fromTo("#m-3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.6)" }, ${r(mv + moral.at[2])});`);
 anim.push(`tl.fromTo("#m-4", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, ${r(mv + moral.audio + 0.3)});`);
 
 const page = `<!doctype html>
@@ -172,6 +182,9 @@ const page = `<!doctype html>
       .moral-eq { font-family: "Fraunces", serif; font-weight: 700; font-size: 92px; white-space: nowrap; }
       .moral-eq > span { display: inline-block; }
       .moral-strong { color: var(--accent); font-weight: 900; }
+      .moral-parts { font-family: "Fraunces", serif; font-weight: 700; font-size: 66px; white-space: nowrap; margin-bottom: 50px; }
+      .moral-parts .frac { font-size: 0.8em; }
+      .moral-sum { font-size: 96px; }
       .moral-note { margin-top: 60px; font-size: 50px; font-weight: 800; }
     </style>
   </head>
